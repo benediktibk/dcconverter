@@ -1,11 +1,15 @@
+int timeOn;
+int timeOff;
+
 void setup() {
   pinMode(13, OUTPUT);
+  timeOn = 10;
+  timeOff = 134 - timeOn;
 }
 
 void loop() {
-  int delayValue = 0;
   digitalWrite(13, HIGH);
-  delay(delayValue);
+  delayMicroseconds(timeOn);
   digitalWrite(13, LOW);
-  delay(delayValue);
+  delayMicroseconds(timeOff);
 }
