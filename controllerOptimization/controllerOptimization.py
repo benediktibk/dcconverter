@@ -21,10 +21,12 @@ class CircuitWithSingularState:
 		gamma = resistanceOfInductance / loadResistance + 1
 		epsilon = inputVoltage
 		
-		a = alpha * alpha / beta
-		b = beta - 2 * alpha * gamma / beta
-		c = gamma * gamma / beta
-		innerRoot = math.sqrt(b * b - 4 * a * c)
+		a = alpha * alpha
+		b = beta * beta - 2 * alpha * gamma
+		c = gamma * gamma
+		firstRootPart = b * b
+		secondRootPart = 4 * a * c
+		innerRoot = math.sqrt(firstRootPart - secondRootPart)
 		
 		if b > 0:
 			angularFrequency = math.sqrt(((-1) * b + innerRoot) / (2 * a))
@@ -32,14 +34,18 @@ class CircuitWithSingularState:
 			raise NotImplementedError()
 		else:
 			angularFrequency = math.sqrt(((-1) * b - innerRoot) / (2 * a))
+
+		D = epsilon / gamma
+		B = outputVoltageInitial - D
+		A = B / beta * (alpha * angularFrequency - gamma / angularFrequency)
 		
 		self._angularFrequency = angularFrequency
-		self._A = (alpha * angularFrequency / beta - gamma / (beta * angularFrequency)) * (outputVoltageInitial - epsilon)
-		self._B = outputVoltageInitial - epsilon
-		self._D = epsilon
+		self._A = A
+		self._B = B
+		self._D = D
 		
 	def calculateOutputVoltage(self, t):
-		return self._A * sin(self._angularFrequency * t) + self._B * cos(self._angularFrequency * t) + self._D
+		return self._A * math.sin(self._angularFrequency * t) + self._B * math.cos(self._angularFrequency * t) + self._D
 		
 class Circuit:
 	def __init__(self, igbtForwardVoltage, diodeForwardVoltage, inductance, resistanceOfInductance, capacity, loadResistance, inputVoltage):
