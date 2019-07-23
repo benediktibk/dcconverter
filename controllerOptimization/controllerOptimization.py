@@ -19,10 +19,11 @@ class CircuitWithSingularState:
 		alpha = inductance * capacity
 		beta = inductance / loadResistance + resistanceOfInductance * capacity
 		gamma = resistanceOfInductance / loadResistance + 1
+		epsilon = inputVoltage
 		
-		a = (alpha * alpha * inputVoltage) / (beta * gamma) - (alpha * alpha * outputVoltageInitial) / beta
-		b = alpha * outputVoltageInitial * gamma - inputVoltage * alpha + inputVoltage * beta / gamma - beta * outputVoltageInitial + alpha * gamma * outputVoltageInitial / beta - alpha * inputVoltage / beta
-		c = gamma * inputVoltage - gamma * gamma * outputVoltageInitial
+		a = alpha * alpha / beta
+		b = beta - 2 * alpha * gamma / beta
+		c = gamma * gamma / beta
 		innerRoot = math.sqrt(b * b - 4 * a * c)
 		
 		if b > 0:
@@ -33,9 +34,9 @@ class CircuitWithSingularState:
 			angularFrequency = math.sqrt(((-1) * b - innerRoot) / (2 * a))
 		
 		self._angularFrequency = angularFrequency
-		self._A = alpha / beta * (outputVoltageInitial - inputVoltage / gamma) * angularFrequency + inputVoltage / angularFrequency - gamma * outputVoltageInitial / angularFrequency
-		self._B = outputVoltageInitial - inputVoltage / gamma
-		self._D = inputVoltage / gamma
+		self._A = (alpha * angularFrequency / beta - gamma / (beta * angularFrequency)) * (outputVoltageInitial - epsilon)
+		self._B = outputVoltageInitial - epsilon
+		self._D = epsilon
 		
 	def calculateOutputVoltage(self, t):
 		return self._A * sin(self._angularFrequency * t) + self._B * cos(self._angularFrequency * t) + self._D
