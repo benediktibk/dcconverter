@@ -2,20 +2,24 @@
 
 namespace CircuitSimulation
 {
-    public class ResistorInSeries : ICircuit
+    public class ResistorInSeriesAndCapacitor : ICircuit
     {
         #region private variables
 
         private readonly double _loadResistor;
         private readonly double _seriesResistor;
+        private readonly double _capacitor;
+        private readonly double _outputVoltageInitial;
 
         #endregion
 
         #region constructor
 
-        public ResistorInSeries(double loadResistor, double seriesResistor) {
+        public ResistorInSeriesAndCapacitor(double loadResistor, double seriesResistor, double capacitor, double outputVoltageInitial) {
             _loadResistor = loadResistor;
             _seriesResistor = seriesResistor;
+            _capacitor = capacitor;
+            _outputVoltageInitial = outputVoltageInitial;
         }
 
         #endregion

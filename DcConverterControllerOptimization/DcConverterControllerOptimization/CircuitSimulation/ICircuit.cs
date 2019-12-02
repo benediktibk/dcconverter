@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CircuitSimulation
+﻿namespace CircuitSimulation
 {
     interface ICircuit
     {
-        double CalculateOutputVoltage(double inputVoltage, double outputVoltageInitial);
+        double CalculateOutputVoltage(double time, double inputVoltage);
     }
 }
