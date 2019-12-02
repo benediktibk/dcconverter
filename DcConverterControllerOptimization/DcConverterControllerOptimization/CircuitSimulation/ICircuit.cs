@@ -2,6 +2,6 @@
 {
     interface ICircuit
     {
-        double CalculateOutputVoltage(double time, double inputVoltage);
+        double CalculateOutputVoltage(double time);
     }
 }

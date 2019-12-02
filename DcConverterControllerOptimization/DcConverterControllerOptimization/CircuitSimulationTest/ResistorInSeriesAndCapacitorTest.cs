@@ -9,9 +9,9 @@ namespace CircuitSimulationTest
     {
         [TestMethod]
         public void CalculateOutputVoltage_0InitialVoltage05s_CorrectVoltage() {
-            var circuit = new ResistorInSeriesAndCapacitor(2, 3, 0.3, 0);
+            var circuit = new ResistorInSeriesAndCapacitor(2, 3, 0.3, 0, 10);
 
-            var outputVoltage = circuit.CalculateOutputVoltage(0.5, 10);
+            var outputVoltage = circuit.CalculateOutputVoltage(0.5);
 
             outputVoltage.Should().BeApproximately(2.99004, 1e-5);
         }
