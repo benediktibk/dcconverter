@@ -2,3 +2,7 @@
 *.raw
 *.net
 ~$*.xlsx
+*.suo
+**/.vs/**
+**/obj/**
+**/bin/**
