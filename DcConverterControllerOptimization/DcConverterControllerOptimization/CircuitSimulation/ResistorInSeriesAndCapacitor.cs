@@ -30,7 +30,9 @@ namespace CircuitSimulation
 
         public double CalculateOutputVoltage(double time) {
             var lambda = 1 / (_capacitor * _seriesResistor) + 1 / (_capacitor * _loadResistor);
-            var offset = _loadResistor * inputVoltage
+            var offset = _loadResistor * _inputVoltage / (_seriesResistor + _loadResistor);
+            var k = _outputVoltageInitial - offset;
+            return k * Math.Exp(lambda * time) + offset;
         }
 
         #endregion
