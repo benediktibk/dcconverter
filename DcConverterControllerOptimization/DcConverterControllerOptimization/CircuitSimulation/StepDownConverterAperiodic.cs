@@ -2,7 +2,7 @@
 
 namespace CircuitSimulation
 {
-    public class StepDownConverterPeriodic : ICircuit
+    public class StepDownConverterAperiodic : ICircuit
     {
         #region private variables
 
@@ -13,12 +13,16 @@ namespace CircuitSimulation
         private readonly double _beta;
         private readonly double _gamma;
         private readonly double _radicand;
+        private readonly double _lambda1;
+        private readonly double _lambda2;
+        private readonly double _k1;
+        private readonly double _k2;
 
         #endregion
 
         #region constructor
 
-        public StepDownConverterPeriodic(double outputVoltageInitial, double outputVoltageInitialGradient, double inputVoltage, double alpha, double beta, double gamma, double radicand) {
+        public StepDownConverterAperiodic(double outputVoltageInitial, double outputVoltageInitialGradient, double inputVoltage, double alpha, double beta, double gamma, double radicand) {
             _outputVoltageInitial = outputVoltageInitial;
             _outputVoltageInitialGradient = outputVoltageInitialGradient;
             _inputVoltage = inputVoltage;
@@ -26,22 +30,29 @@ namespace CircuitSimulation
             _beta = beta;
             _gamma = gamma;
             _radicand = radicand;
+            _lambda1 = ((-1) * _beta + Math.Sqrt(_radicand)) / (2 * _alpha);
+            _lambda2 = ((-1) * _beta - Math.Sqrt(_radicand)) / (2 * _alpha);
+            _k2 =
+                (_outputVoltageInitialGradient - _lambda1 * _outputVoltageInitial + _inputVoltage * _lambda1 / _gamma) /
+                (_lambda2 - _lambda1);
+            _k1 = _outputVoltageInitialGradient / _lambda1 - _lambda2 / _lambda1 * _k2;
         }
 
         #endregion
 
         #region public functions
         public double CalculateOutputVoltage(double time) {
-            var a = (-1) * _beta / (2 * _alpha);
-            var b = Math.Sqrt((-1) * _radicand) / (2 * _alpha);
-            var k1 = _outputVoltageInitial - _inputVoltage / _gamma;
-            var k2 = (_outputVoltageInitialGradient - a * k1) / b;
             return 
-                k1 * Math.Exp(a * time) * Math.Cos(b * time) + 
-                k2 * Math.Exp(a * time) * Math.Sin(b * time) + 
+                _k1 * Math.Exp(_lambda1 * time) + 
+                _k2 * Math.Exp(_lambda2 * time) + 
                 _inputVoltage / _gamma;
         }
-        public double CalculateOutputVoltageGradient(double time) => throw new NotImplementedException();
+
+        public double CalculateOutputVoltageGradient(double time) {
+            return
+                _k1 * _lambda1 * Math.Exp(_lambda1 * time) +
+                _k2 * _lambda2 * Math.Exp(_lambda2 * time);
+        }
 
         #endregion
     }

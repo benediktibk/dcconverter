@@ -2,7 +2,7 @@
 
 namespace CircuitSimulation
 {
-    public class StepDownConverterAperiodic : ICircuit
+    public class StepDownConverterPeriodic : ICircuit
     {
         #region private variables
 
@@ -13,8 +13,8 @@ namespace CircuitSimulation
         private readonly double _beta;
         private readonly double _gamma;
         private readonly double _radicand;
-        private readonly double _lambda1;
-        private readonly double _lambda2;
+        private readonly double _a;
+        private readonly double _b;
         private readonly double _k1;
         private readonly double _k2;
 
@@ -22,7 +22,7 @@ namespace CircuitSimulation
 
         #region constructor
 
-        public StepDownConverterAperiodic(double outputVoltageInitial, double outputVoltageInitialGradient, double inputVoltage, double alpha, double beta, double gamma, double radicand) {
+        public StepDownConverterPeriodic(double outputVoltageInitial, double outputVoltageInitialGradient, double inputVoltage, double alpha, double beta, double gamma, double radicand) {
             _outputVoltageInitial = outputVoltageInitial;
             _outputVoltageInitialGradient = outputVoltageInitialGradient;
             _inputVoltage = inputVoltage;
@@ -30,12 +30,10 @@ namespace CircuitSimulation
             _beta = beta;
             _gamma = gamma;
             _radicand = radicand;
-            _lambda1 = ((-1) * _beta + Math.Sqrt(_radicand)) / (2 * _alpha);
-            _lambda2 = ((-1) * _beta - Math.Sqrt(_radicand)) / (2 * _alpha);
-            _k2 =
-                (_outputVoltageInitialGradient - _lambda1 * _outputVoltageInitial + _inputVoltage * _lambda1 / _gamma) /
-                (_lambda2 - _lambda1);
-            _k1 = _outputVoltageInitialGradient / _lambda1 - _lambda2 / _lambda1 * _k2;
+            _a = (-1) * _beta / (2 * _alpha);
+            _b = Math.Sqrt((-1) * _radicand) / (2 * _alpha);
+            _k1 = _outputVoltageInitial - _inputVoltage / _gamma;
+            _k2 = (_outputVoltageInitialGradient - _a * _k1) / _b;
         }
 
         #endregion
@@ -43,15 +41,17 @@ namespace CircuitSimulation
         #region public functions
         public double CalculateOutputVoltage(double time) {
             return 
-                _k1 * Math.Exp(_lambda1 * time) + 
-                _k2 * Math.Exp(_lambda2 * time) + 
+                _k1 * Math.Exp(_a * time) * Math.Cos(_b * time) + 
+                _k2 * Math.Exp(_a * time) * Math.Sin(_b * time) + 
                 _inputVoltage / _gamma;
         }
 
         public double CalculateOutputVoltageGradient(double time) {
             return
-                _k1 * _lambda1 * Math.Exp(_lambda1 * time) +
-                _k2 * _lambda2 * Math.Exp(_lambda2 * time);
+                _k1 * _a * Math.Exp(_a * time) * Math.Cos(_b * time) -
+                _k1 * _b * Math.Exp(_a * time) * Math.Sin(_b * time) +
+                _k2 * _a * Math.Exp(_a * time) * Math.Sin(_b * time) +
+                _k2 * _b * Math.Exp(_a * time) * Math.Cos(_b * time);
         }
 
         #endregion
