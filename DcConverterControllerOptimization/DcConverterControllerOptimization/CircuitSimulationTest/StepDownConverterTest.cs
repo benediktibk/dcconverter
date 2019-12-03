@@ -80,9 +80,9 @@ namespace CircuitSimulationTest
             _aperiodicCircuit.InputVoltage = 5;
             var circuitOff = new StepDownConverter(_aperiodicCircuit);
 
-            var outputVoltage = circuitOff.CalculateOutputVoltage(0.489500);
+            var outputVoltage = circuitOff.CalculateOutputVoltage(0.453500);
 
-            outputVoltage.Should().BeApproximately(3.481622, 1e-3);
+            outputVoltage.Should().BeApproximately(2.503592, 1e-3);
         }
 
         [TestMethod]
