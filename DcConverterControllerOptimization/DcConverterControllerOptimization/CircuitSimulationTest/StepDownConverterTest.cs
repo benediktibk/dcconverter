@@ -87,7 +87,7 @@ namespace CircuitSimulationTest
         }
 
         [TestMethod]
-        public void CalculateOutputVoltage_AperiodicWithPulse_CorrectVoltage() {
+        public void CalculateOutputVoltage_AperiodicWithPulsePoint1_CorrectVoltage() {
             _aperiodicCircuit.OutputVoltageInitial = 2;
             var circuitOn = new StepDownConverter(_aperiodicCircuit);
             _aperiodicCircuit.OutputVoltageInitial = circuitOn.CalculateOutputVoltage(0.2);
@@ -95,9 +95,33 @@ namespace CircuitSimulationTest
             _aperiodicCircuit.InputVoltage = 5;
             var circuitOff = new StepDownConverter(_aperiodicCircuit);
 
-            var outputVoltage = circuitOff.CalculateOutputVoltage(0.453500);
+            var outputVoltage = circuitOff.CalculateOutputVoltage(0.473240 - 0.2);
 
-            outputVoltage.Should().BeApproximately(2.503592, 1e-3);
+            outputVoltage.Should().BeApproximately(2.432765, 1e-2);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_AperiodicWithPulsePoint2_CorrectVoltage() {
+            _aperiodicCircuit.OutputVoltageInitial = 2;
+            var circuitOn = new StepDownConverter(_aperiodicCircuit);
+            _aperiodicCircuit.OutputVoltageInitial = circuitOn.CalculateOutputVoltage(0.2);
+            _aperiodicCircuit.OutputVoltageGradientInitial = circuitOn.CalculateOutputVoltageGradient(0.2);
+            _aperiodicCircuit.InputVoltage = 5;
+            var circuitOff = new StepDownConverter(_aperiodicCircuit);
+
+            var outputVoltage = circuitOff.CalculateOutputVoltage(0.201000 - 0.2);
+
+            outputVoltage.Should().BeApproximately(2.959440, 1e-2);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_AperiodicWithPulsePoint3_CorrectVoltage() {
+            _aperiodicCircuit.OutputVoltageInitial = 2;
+            var circuitOn = new StepDownConverter(_aperiodicCircuit);
+
+            var outputVoltage = circuitOn.CalculateOutputVoltage(0.170150);
+
+            outputVoltage.Should().BeApproximately(2.823536, 3e-3);
         }
 
         [TestMethod]
@@ -109,7 +133,7 @@ namespace CircuitSimulationTest
             _periodicCircuit.InputVoltage = 2.2;
             var circuitOff = new StepDownConverter(_periodicCircuit);
 
-            var outputVoltage = circuitOff.CalculateOutputVoltage(0.994500);
+            var outputVoltage = circuitOff.CalculateOutputVoltage(0.994500 - 0.2);
 
             outputVoltage.Should().BeApproximately(3.426294, 1e-3);
         }
