@@ -2,11 +2,11 @@
 
 namespace CircuitSimulation
 {
-    public class StepDownConverter : ICircuit
+    public class StepDownConverter : ICircuitSimulator
     {
         #region private variables
 
-        private readonly ICircuit _internalCircuit;
+        private readonly ICircuitSimulator _internalCircuit;
 
         #endregion
 

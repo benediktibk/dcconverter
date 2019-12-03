@@ -2,7 +2,7 @@
 
 namespace CircuitSimulation
 {
-    public class StepDownConverterPeriodic : ICircuit
+    public class StepDownConverterPeriodic : ICircuitSimulator
     {
         #region private variables
 

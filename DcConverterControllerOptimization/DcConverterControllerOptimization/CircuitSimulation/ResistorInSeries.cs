@@ -2,7 +2,7 @@
 
 namespace CircuitSimulation
 {
-    public class ResistorInSeries : ICircuit
+    public class ResistorInSeries : ICircuitSimulator
     {
         #region private variables
 
