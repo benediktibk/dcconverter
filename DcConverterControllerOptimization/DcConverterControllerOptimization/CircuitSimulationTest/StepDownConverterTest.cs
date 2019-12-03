@@ -24,5 +24,14 @@ namespace CircuitSimulationTest
 
             outputVoltage.Should().BeApproximately(5.107602, 2e-3);
         }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_Aeriodic0InitialVoltageAnd407ms_CorrectVoltage() {
+            var circuit = new StepDownConverter(2, 3, 0.220, 0.100, 0, 0, 10);
+
+            var outputVoltage = circuit.CalculateOutputVoltage(0.40718702);
+
+            outputVoltage.Should().BeApproximately(3.09207, 2e-3);
+        }
     }
 }
