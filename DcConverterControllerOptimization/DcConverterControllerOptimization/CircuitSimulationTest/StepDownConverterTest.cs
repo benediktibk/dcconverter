@@ -62,13 +62,13 @@ namespace CircuitSimulationTest
         }
 
         [TestMethod]
-        public void CalculateOutputVoltage_Aperiodic2InitialVoltageAnd407ms_CorrectVoltage() {
+        public void CalculateOutputVoltage_Aperiodic2InitialVoltageAnd237ms_CorrectVoltage() {
             _aperiodicCircuit.OutputVoltageInitial = 2;
             var circuit = new StepDownConverter(_aperiodicCircuit);
 
-            var outputVoltage = circuit.CalculateOutputVoltage(0.40718702);
+            var outputVoltage = circuit.CalculateOutputVoltage(0.237048577);
 
-            outputVoltage.Should().BeApproximately(3.09207, 2e-3);
+            outputVoltage.Should().BeApproximately(3.100989, 1e-3);
         }
 
         [TestMethod]
