@@ -98,5 +98,45 @@ namespace CircuitSimulationTest
 
             outputVoltage.Should().BeApproximately(3.426294, 1e-3);
         }
+
+        [TestMethod]
+        public void CalculateOutputVoltageGradient_Aperiodic2InitialVoltageAnd0s_CorrectVoltage() {
+            _aperiodicCircuit.OutputVoltageInitial = 2;
+            var circuit = new StepDownConverter(_aperiodicCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltageGradient(0);
+
+            outputVoltage.Should().BeApproximately(0, 1e-3);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltageGradient_Periodic2InitialVoltageAnd0s_CorrectVoltage() {
+            _periodicCircuit.OutputVoltageInitial = 2;
+            var circuit = new StepDownConverter(_periodicCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltageGradient(0);
+
+            outputVoltage.Should().BeApproximately(0, 1e-3);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltageGradient_Aperiodic2InitialVoltageAnd1000s_CorrectVoltage() {
+            _aperiodicCircuit.OutputVoltageInitial = 2;
+            var circuit = new StepDownConverter(_aperiodicCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltageGradient(1000);
+
+            outputVoltage.Should().BeApproximately(0, 1e-3);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltageGradient_Periodic2InitialVoltageAnd1000s_CorrectVoltage() {
+            _periodicCircuit.OutputVoltageInitial = 2;
+            var circuit = new StepDownConverter(_periodicCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltageGradient(1000);
+
+            outputVoltage.Should().BeApproximately(0, 1e-3);
+        }
     }
 }
