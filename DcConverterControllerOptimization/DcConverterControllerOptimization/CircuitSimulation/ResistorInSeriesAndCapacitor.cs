@@ -29,7 +29,7 @@ namespace CircuitSimulation
         #region public functions
 
         public double CalculateOutputVoltage(double time) {
-            var lambda = 1 / (_capacitor * _seriesResistor) + 1 / (_capacitor * _loadResistor);
+            var lambda = (-1) * (_seriesResistor + _loadResistor) / (_seriesResistor * _loadResistor * _capacitor);
             var offset = _loadResistor * _inputVoltage / (_seriesResistor + _loadResistor);
             var k = _outputVoltageInitial - offset;
             return k * Math.Exp(lambda * time) + offset;
