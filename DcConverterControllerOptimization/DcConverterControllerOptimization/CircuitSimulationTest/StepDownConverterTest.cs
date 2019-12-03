@@ -133,9 +133,9 @@ namespace CircuitSimulationTest
             _periodicCircuit.InputVoltage = 2.2;
             var circuitOff = new StepDownConverter(_periodicCircuit);
 
-            var outputVoltage = circuitOff.CalculateOutputVoltage(0.994500 - 0.2);
+            var outputVoltage = circuitOff.CalculateOutputVoltage(0.765300 - 0.2);
 
-            outputVoltage.Should().BeApproximately(3.426294, 1e-3);
+            outputVoltage.Should().BeApproximately(3.66616, 1e-2);
         }
 
         [TestMethod]
