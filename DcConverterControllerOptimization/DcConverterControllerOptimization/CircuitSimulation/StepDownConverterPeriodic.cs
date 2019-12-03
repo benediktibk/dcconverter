@@ -7,7 +7,7 @@ namespace CircuitSimulation
         #region private variables
 
         private readonly double _outputVoltageInitial;
-        private readonly double _outputVoltageInitialGradient;
+        private readonly double _outputVoltageGradientInitial;
         private readonly double _inputVoltage;
         private readonly double _alpha;
         private readonly double _beta;
@@ -22,9 +22,9 @@ namespace CircuitSimulation
 
         #region constructor
 
-        public StepDownConverterPeriodic(double outputVoltageInitial, double outputVoltageInitialGradient, double inputVoltage, double alpha, double beta, double gamma, double radicand) {
+        public StepDownConverterPeriodic(double outputVoltageInitial, double outputVoltageGradientInitial, double inputVoltage, double alpha, double beta, double gamma, double radicand) {
             _outputVoltageInitial = outputVoltageInitial;
-            _outputVoltageInitialGradient = outputVoltageInitialGradient;
+            _outputVoltageGradientInitial = outputVoltageGradientInitial;
             _inputVoltage = inputVoltage;
             _alpha = alpha;
             _beta = beta;
@@ -33,7 +33,7 @@ namespace CircuitSimulation
             _a = (-1) * _beta / (2 * _alpha);
             _b = Math.Sqrt((-1) * _radicand) / (2 * _alpha);
             _k1 = _outputVoltageInitial - _inputVoltage / _gamma;
-            _k2 = (_outputVoltageInitialGradient - _a * _k1) / _b;
+            _k2 = (_outputVoltageGradientInitial - _a * _k1) / _b;
         }
 
         #endregion

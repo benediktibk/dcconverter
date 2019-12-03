@@ -7,9 +7,35 @@ namespace CircuitSimulationTest
     [TestClass]
     public class StepDownConverterTest
     {
+        private Circuit _aperiodicCircuit;
+        private Circuit _periodicCircuit;
+
+        [TestInitialize]
+        public void Setup() {
+            _aperiodicCircuit = new Circuit {
+                LoadResistor = 2,
+                SeriesResistor = 3,
+                Capacitor = 0.220,
+                Inductance = 0.100,
+                OutputVoltageInitial = 0,
+                OutputVoltageGradientInitial = 0,
+                InputVoltage = 10
+            };
+
+            _periodicCircuit = new Circuit {
+                LoadResistor = 2,
+                SeriesResistor = 0.2,
+                Capacitor = 0.220,
+                Inductance = 0.900,
+                OutputVoltageInitial = 0,
+                OutputVoltageGradientInitial = 0,
+                InputVoltage = 10
+            };
+        }
+
         [TestMethod]
         public void CalculateOutputVoltage_Periodic0InitialVoltageAnd894ms_CorrectVoltage() {
-            var circuit = new StepDownConverter(2, 0.2, 0.220, 0.900, 0, 0, 10);
+            var circuit = new StepDownConverter(_periodicCircuit);
 
             var outputVoltage = circuit.CalculateOutputVoltage(0.894518705);
 
@@ -18,7 +44,8 @@ namespace CircuitSimulationTest
 
         [TestMethod]
         public void CalculateOutputVoltage_Periodic2InitialVoltageAnd507ms_CorrectVoltage() {
-            var circuit = new StepDownConverter(2, 0.2, 0.220, 0.900, 2, 0, 10);
+            _periodicCircuit.OutputVoltageInitial = 2;
+            var circuit = new StepDownConverter(_periodicCircuit);
 
             var outputVoltage = circuit.CalculateOutputVoltage(0.507509959);
 
@@ -26,8 +53,18 @@ namespace CircuitSimulationTest
         }
 
         [TestMethod]
-        public void CalculateOutputVoltage_Aeriodic0InitialVoltageAnd407ms_CorrectVoltage() {
-            var circuit = new StepDownConverter(2, 3, 0.220, 0.100, 0, 0, 10);
+        public void CalculateOutputVoltage_Aperiodic0InitialVoltageAnd407ms_CorrectVoltage() {
+            var circuit = new StepDownConverter(_aperiodicCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltage(0.40718702);
+
+            outputVoltage.Should().BeApproximately(3.09207, 2e-3);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_Aperiodic2InitialVoltageAnd407ms_CorrectVoltage() {
+            _aperiodicCircuit.OutputVoltageInitial = 2;
+            var circuit = new StepDownConverter(_aperiodicCircuit);
 
             var outputVoltage = circuit.CalculateOutputVoltage(0.40718702);
 
@@ -36,10 +73,12 @@ namespace CircuitSimulationTest
 
         [TestMethod]
         public void CalculateOutputVoltage_AperiodicWithPulse_CorrectVoltage() {
-            var circuitOn = new StepDownConverter(2, 3, 0.220, 0.100, 2, 0, 10);
-            var offInitialVoltage = circuitOn.CalculateOutputVoltage(0.2);
-            var offInitialVoltageGradient = circuitOn.CalculateOutputVoltageGradient(0.2);
-            var circuitOff = new StepDownConverter(2, 3, 0.220, 0.100, offInitialVoltage, offInitialVoltageGradient, 5);
+            _aperiodicCircuit.OutputVoltageInitial = 2;
+            var circuitOn = new StepDownConverter(_aperiodicCircuit);
+            _aperiodicCircuit.OutputVoltageInitial = circuitOn.CalculateOutputVoltage(0.2);
+            _aperiodicCircuit.OutputVoltageGradientInitial = circuitOn.CalculateOutputVoltageGradient(0.2);
+            _aperiodicCircuit.InputVoltage = 5;
+            var circuitOff = new StepDownConverter(_aperiodicCircuit);
 
             var outputVoltage = circuitOff.CalculateOutputVoltage(0.489500);
 
@@ -48,10 +87,12 @@ namespace CircuitSimulationTest
 
         [TestMethod]
         public void CalculateOutputVoltage_PeriodicWithPulse_CorrectVoltage() {
-            var circuitOn = new StepDownConverter(2, 0.2, 0.220, 0.900, 2, 0, 10);
-            var offInitialVoltage = circuitOn.CalculateOutputVoltage(0.2);
-            var offInitialVoltageGradient = circuitOn.CalculateOutputVoltageGradient(0.2);
-            var circuitOff = new StepDownConverter(2, 0.2, 0.220, 0.900, offInitialVoltage, offInitialVoltageGradient, 2.2);
+            _periodicCircuit.OutputVoltageInitial = 2;
+            var circuitOn = new StepDownConverter(_periodicCircuit);
+            _periodicCircuit.OutputVoltageInitial = circuitOn.CalculateOutputVoltage(0.2);
+            _periodicCircuit.OutputVoltageGradientInitial = circuitOn.CalculateOutputVoltageGradient(0.2);
+            _periodicCircuit.InputVoltage = 2.2;
+            var circuitOff = new StepDownConverter(_periodicCircuit);
 
             var outputVoltage = circuitOff.CalculateOutputVoltage(0.994500);
 

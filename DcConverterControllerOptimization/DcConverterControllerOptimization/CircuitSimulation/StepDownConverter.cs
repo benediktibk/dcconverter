@@ -12,16 +12,16 @@ namespace CircuitSimulation
 
         #region constructor
 
-        public StepDownConverter(double loadResistor, double seriesResistor, double capacitor, double inductance, double outputVoltageInitial, double outputVoltageInitialGradient, double inputVoltage) {
-            var alpha = inductance * capacitor;
-            var beta = (inductance + seriesResistor * loadResistor * capacitor) / loadResistor;
-            var gamma = (loadResistor + seriesResistor) / loadResistor;
+        public StepDownConverter(Circuit circuit) {
+            var alpha = circuit.Inductance * circuit.Capacitor;
+            var beta = (circuit.Inductance + circuit.SeriesResistor * circuit.LoadResistor * circuit.Capacitor) / circuit.LoadResistor;
+            var gamma = (circuit.LoadResistor + circuit.SeriesResistor) / circuit.LoadResistor;
             var radicand = beta * beta - 4 * alpha * gamma;
 
             if (radicand > 0)
-                _internalCircuit = new StepDownConverterAperiodic(outputVoltageInitial, outputVoltageInitialGradient, inputVoltage, alpha, beta, gamma, radicand);
+                _internalCircuit = new StepDownConverterAperiodic(circuit.OutputVoltageInitial, circuit.OutputVoltageGradientInitial, circuit.InputVoltage, alpha, beta, gamma, radicand);
             else if (radicand < 0)
-                _internalCircuit = new StepDownConverterPeriodic(outputVoltageInitial, outputVoltageInitialGradient, inputVoltage, alpha, beta, gamma, radicand);
+                _internalCircuit = new StepDownConverterPeriodic(circuit.OutputVoltageInitial, circuit.OutputVoltageGradientInitial, circuit.InputVoltage, alpha, beta, gamma, radicand);
             else
                 throw new NotImplementedException("aperiodic edge case is not implemented");
         }
