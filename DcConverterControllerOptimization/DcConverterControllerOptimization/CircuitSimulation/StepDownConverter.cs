@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace CircuitSimulation
 {
@@ -13,6 +13,10 @@ namespace CircuitSimulation
         private readonly double _outputVoltageInitial;
         private readonly double _outputVoltageInitialGradient;
         private readonly double _inputVoltage;
+        private readonly double _alpha;
+        private readonly double _beta;
+        private readonly double _gamma;
+        private readonly double _radicand;
 
         #endregion
 
@@ -26,6 +30,10 @@ namespace CircuitSimulation
             _outputVoltageInitial = outputVoltageInitial;
             _outputVoltageInitialGradient = outputVoltageInitialGradient;
             _inputVoltage = inputVoltage;
+            _alpha = _inductance * _capacitor;
+            _beta = (_inductance + _seriesResistor * _loadResistor * _capacitor) / _loadResistor;
+            _gamma = (_loadResistor + _seriesResistor) / _loadResistor; 
+            _radicand = _beta * _beta - 4 * _alpha * _gamma;
         }
 
         #endregion
@@ -33,15 +41,10 @@ namespace CircuitSimulation
         #region public functions
 
         public double CalculateOutputVoltage(double time) {
-            var alpha = _inductance * _capacitor;
-            var beta = (_inductance + _seriesResistor * _loadResistor * _capacitor) / _loadResistor;
-            var gamma = (_loadResistor + _seriesResistor) / _loadResistor;
-            var radicand = beta * beta - 4 * alpha * gamma;
-
-            if (radicand > 0)
-                return CalculateOutputVoltageAperiodic(time, alpha, beta, gamma, radicand);
+            if (_radicand > 0)
+                return CalculateOutputVoltageAperiodic(time);
             else
-                return CalculateOutputVoltagePeriodic(time, alpha, beta, gamma, radicand);
+                return CalculateOutputVoltagePeriodic(time);
         }
 
         public double CalculateOutputVoltageGradient(double time) => throw new NotImplementedException();
@@ -50,20 +53,20 @@ namespace CircuitSimulation
 
         #region private functions
 
-        private double CalculateOutputVoltageAperiodic(double time, double alpha, double beta, double gamma, double radicand) {
-            var lambda1 = ((-1) * beta + Math.Sqrt(radicand)) / (2 * alpha);
-            var lambda2 = ((-1) * beta - Math.Sqrt(radicand)) / (2 * alpha);
-            var k2 = (_outputVoltageInitialGradient - lambda1 * _outputVoltageInitial + _inputVoltage * lambda1 / gamma) / (lambda2 - lambda1);
+        private double CalculateOutputVoltageAperiodic(double time) {
+            var lambda1 = ((-1) * _beta + Math.Sqrt(_radicand)) / (2 * _alpha);
+            var lambda2 = ((-1) * _beta - Math.Sqrt(_radicand)) / (2 * _alpha);
+            var k2 = (_outputVoltageInitialGradient - lambda1 * _outputVoltageInitial + _inputVoltage * lambda1 / _gamma) / (lambda2 - lambda1);
             var k1 = _outputVoltageInitialGradient / lambda1 - lambda2 / lambda1 * k2;
-            return k1 * Math.Exp(lambda1 * time) + k2 * Math.Exp(lambda2 * time) + _inputVoltage / gamma;
+            return k1 * Math.Exp(lambda1 * time) + k2 * Math.Exp(lambda2 * time) + _inputVoltage / _gamma;
         }
 
-        private double CalculateOutputVoltagePeriodic(double time, double alpha, double beta, double gamma, double radicand) {
-            var a = (-1) * beta / (2 * alpha);
-            var b = Math.Sqrt((-1) * radicand) / (2 * alpha);
-            var k1 = _outputVoltageInitial - _inputVoltage / gamma;
+        private double CalculateOutputVoltagePeriodic(double time) {
+            var a = (-1) * _beta / (2 * _alpha);
+            var b = Math.Sqrt((-1) * _radicand) / (2 * _alpha);
+            var k1 = _outputVoltageInitial - _inputVoltage / _gamma;
             var k2 = (_outputVoltageInitialGradient - a * k1) / b;
-            return k1 * Math.Exp(a * time) * Math.Cos(b * time) + k2 * Math.Exp(a * time) * Math.Sin(b * time) + _inputVoltage / gamma;
+            return k1 * Math.Exp(a * time) * Math.Cos(b * time) + k2 * Math.Exp(a * time) * Math.Sin(b * time) + _inputVoltage / _gamma;
         }
 
         #endregion
