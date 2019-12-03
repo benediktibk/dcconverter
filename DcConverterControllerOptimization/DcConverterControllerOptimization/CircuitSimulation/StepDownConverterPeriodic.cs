@@ -13,6 +13,10 @@ namespace CircuitSimulation
         private readonly double _beta;
         private readonly double _gamma;
         private readonly double _radicand;
+        private readonly double _lambda1;
+        private readonly double _lambda2;
+        private readonly double _k1;
+        private readonly double _k2;
 
         #endregion
 
@@ -26,24 +30,29 @@ namespace CircuitSimulation
             _beta = beta;
             _gamma = gamma;
             _radicand = radicand;
+            _lambda1 = ((-1) * _beta + Math.Sqrt(_radicand)) / (2 * _alpha);
+            _lambda2 = ((-1) * _beta - Math.Sqrt(_radicand)) / (2 * _alpha);
+            _k2 =
+                (_outputVoltageInitialGradient - _lambda1 * _outputVoltageInitial + _inputVoltage * _lambda1 / _gamma) /
+                (_lambda2 - _lambda1);
+            _k1 = _outputVoltageInitialGradient / _lambda1 - _lambda2 / _lambda1 * _k2;
         }
 
         #endregion
 
         #region public functions
         public double CalculateOutputVoltage(double time) {
-            var lambda1 = ((-1) * _beta + Math.Sqrt(_radicand)) / (2 * _alpha);
-            var lambda2 = ((-1) * _beta - Math.Sqrt(_radicand)) / (2 * _alpha);
-            var k2 = 
-                (_outputVoltageInitialGradient - lambda1 * _outputVoltageInitial + _inputVoltage * lambda1 / _gamma) / 
-                (lambda2 - lambda1);
-            var k1 = _outputVoltageInitialGradient / lambda1 - lambda2 / lambda1 * k2;
             return 
-                k1 * Math.Exp(lambda1 * time) + 
-                k2 * Math.Exp(lambda2 * time) + 
+                _k1 * Math.Exp(_lambda1 * time) + 
+                _k2 * Math.Exp(_lambda2 * time) + 
                 _inputVoltage / _gamma;
         }
-        public double CalculateOutputVoltageGradient(double time) => throw new NotImplementedException();
+
+        public double CalculateOutputVoltageGradient(double time) {
+            return
+                _k1 * _lambda1 * Math.Exp(_lambda1 * time) +
+                _k2 * _lambda2 * Math.Exp(_lambda2 * time);
+        }
 
         #endregion
     }
