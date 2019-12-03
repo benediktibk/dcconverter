@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace CircuitSimulation
 {
@@ -43,6 +43,8 @@ namespace CircuitSimulation
             else
                 return CalculateOutputVoltagePeriodic(time, alpha, beta, gamma, radicand);
         }
+
+        public double CalculateOutputVoltageGradient(double time) => throw new NotImplementedException();
 
         #endregion
 

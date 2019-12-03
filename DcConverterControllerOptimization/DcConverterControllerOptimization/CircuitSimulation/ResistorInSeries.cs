@@ -28,6 +28,8 @@ namespace CircuitSimulation
             return _loadResistor / (_loadResistor + _seriesResistor) * _inputVoltage;
         }
 
+        public double CalculateOutputVoltageGradient(double time) => throw new NotImplementedException();
+
         #endregion
     }
 }

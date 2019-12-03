@@ -35,6 +35,8 @@ namespace CircuitSimulation
             return k * Math.Exp(lambda * time) + offset;
         }
 
+        public double CalculateOutputVoltageGradient(double time) => throw new NotImplementedException();
+
         #endregion
     }
 }
