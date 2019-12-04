@@ -198,6 +198,38 @@ namespace CircuitSimulationTest
         }
 
         [TestMethod]
+        public void CalculateOutputVoltageGradient_Realistic20us_CorrectVoltageGradient() {
+            _realisticCircuit.InputVoltage = 20;
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+            var timeFirstValue = 20e-6;
+            var timeSecondValue = 20.001e-6;
+
+            var outputVoltageFirst = circuit.CalculateOutputVoltage(timeFirstValue);
+            var outputVoltageSecond = circuit.CalculateOutputVoltage(timeSecondValue);
+            var outputVoltageGradient = circuit.CalculateOutputVoltageGradient(timeFirstValue);
+
+            var firstValue = 19.832994e-3;
+            var secondValue = 19.834972e-3;
+            outputVoltageFirst.Should().BeApproximately(firstValue, 1e-4);
+            outputVoltageSecond.Should().BeApproximately(secondValue, 1e-4);
+            outputVoltageGradient.Should().BeApproximately((secondValue - firstValue)/(timeSecondValue - timeFirstValue), 1e-4);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltageGradient_Realistic700us_CorrectVoltageGradient() {
+            _realisticCircuit.InputVoltage = 20;
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+            var timeFirstValue = 700e-6;
+            var timeSecondValue = 700.000001e-6;
+
+            var outputVoltageFirst = circuit.CalculateOutputVoltage(timeFirstValue);
+            var outputVoltageSecond = circuit.CalculateOutputVoltage(timeSecondValue);
+            var outputVoltageGradient = circuit.CalculateOutputVoltageGradient(timeFirstValue);
+
+            outputVoltageGradient.Should().BeApproximately((outputVoltageSecond - outputVoltageFirst) / (timeSecondValue - timeFirstValue), 1e-3);
+        }
+
+        [TestMethod]
         public void CalculateOutputVoltage_RealisticWithPulse_CorrectVoltage() {
             var circuit1 = new StepDownConverterCircuitSimulator(_realisticCircuit);
             _realisticCircuit.OutputVoltageInitial = circuit1.CalculateOutputVoltage(20e-6);
