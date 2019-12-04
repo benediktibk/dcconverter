@@ -38,7 +38,7 @@ namespace ConverterSimulation {
         public bool GetValue(double time) {
             var quotient = (int)(time / _periodTime);
             var remainder = time - quotient * _periodTime;
-            return remainder < _onTime;
+            return remainder < _onTime - _onTime * 1e-4;
         }
 
         #endregion

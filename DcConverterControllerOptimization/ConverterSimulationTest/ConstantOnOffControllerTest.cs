@@ -67,5 +67,68 @@ namespace ConverterSimulationTest {
 
             nextChange.Should().BeApproximately(268e-6, 1e-10);
         }
+               
+        [TestMethod]
+        public void GetValue_0_True() {
+            var controller = new ConstantOnOffController(0.2, 0.5);
+
+            var value = controller.GetValue(0);
+
+            value.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void GetValue_OnTime_False() {
+            var controller = new ConstantOnOffController(0.2, 0.5);
+
+            var value = controller.GetValue(0.2);
+
+            value.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void GetValue_SmallerThanOnTime_True() {
+            var controller = new ConstantOnOffController(0.2, 0.5);
+
+            var value = controller.GetValue(0.1);
+
+            value.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void GetValue_BiggerThanOnTime_False() {
+            var controller = new ConstantOnOffController(0.2, 0.5);
+
+            var value = controller.GetValue(0.3);
+
+            value.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void GetValue_MultiplePeriodInOnTime_True() {
+            var controller = new ConstantOnOffController(0.2, 0.5);
+
+            var value = controller.GetValue(2.2);
+
+            value.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void GetValue_MultiplePeriodInOffTime_False() {
+            var controller = new ConstantOnOffController(0.2, 0.5);
+
+            var value = controller.GetValue(2.7);
+
+            value.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void GetValue_ExactBarrier_False() {
+            var controller = new ConstantOnOffController(20e-6, 114e-6);
+
+            var value = controller.GetValue(154e-6);
+
+            value.Should().BeFalse();
+        }
     }
 }
