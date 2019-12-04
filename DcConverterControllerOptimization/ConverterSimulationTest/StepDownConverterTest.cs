@@ -33,8 +33,8 @@ namespace ConverterSimulationTest {
 
             results.Count.Should().BeGreaterThan(0);
             var result = results.Last();
-            result.Time.Should().BeApproximately(200e-3, 1e-5);
-            result.OutputVoltage.Should().BeApproximately(1.8171461, 1e-3);
+            result.Time.Should().BeApproximately(200e-3, 1e-8);
+            result.OutputVoltage.Should().BeApproximately(2.4042732, 1e-3);
         }
 
         [TestMethod]
@@ -45,6 +45,24 @@ namespace ConverterSimulationTest {
             var result = results.Last();
             result.Time.Should().BeApproximately(0, 1e-5);
             result.OutputVoltage.Should().BeApproximately(0, 1e-3);
+        }
+
+        [TestMethod]
+        public void Simulate_StaticInputVoltageAndConstantOnOffTimeAnd20us_CorrectVoltage() {
+            var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 20e-6);
+
+            results.Count.Should().BeGreaterThan(0);
+            var result = results.Last();
+            result.OutputVoltage.Should().BeApproximately(15.887933e-3, 1e-5);
+        }
+
+        [TestMethod]
+        public void Simulate_StaticInputVoltageAndConstantOnOffTimeAnd60us_CorrectVoltageAt20us() {
+            var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 60e-6);
+
+            results.Count.Should().Be(3);
+            results[1].Time.Should().BeApproximately(20e-6, 1e-10);
+            results[1].OutputVoltage.Should().BeApproximately(15.887933e-3, 1e-5);
         }
 
         [TestMethod]
