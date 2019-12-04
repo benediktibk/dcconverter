@@ -189,7 +189,7 @@ namespace CircuitSimulationTest
         }
 
         [TestMethod]
-        public void CalculateOutputVoltage_Realistic0us_CorrectVoltage() {
+        public void CalculateOutputVoltage_Realistic20us_CorrectVoltage() {
             var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
 
             var outputVoltage = circuit.CalculateOutputVoltage(20e-6);
