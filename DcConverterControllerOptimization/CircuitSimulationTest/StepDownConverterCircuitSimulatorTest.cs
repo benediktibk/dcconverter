@@ -209,5 +209,25 @@ namespace CircuitSimulationTest
 
             outputVoltage.Should().BeApproximately(180.57665e-3, 2e-4);
         }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_Realistic910us_CorrectVoltage() {
+            _realisticCircuit.InputVoltage = 20;
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltage(910.88251e-6);
+
+            outputVoltage.Should().BeApproximately(20.967054, 1e-3);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_Realistic100ms_CorrectVoltage() {
+            _realisticCircuit.InputVoltage = 20;
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltage(0.1);
+
+            outputVoltage.Should().BeApproximately(19.23077, 1e-5);
+        }
     }
 }
