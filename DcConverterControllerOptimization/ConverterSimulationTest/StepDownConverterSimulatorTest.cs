@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ConverterSimulationTest {
     [TestClass]
-    public class StepDownConverterTest {
+    public class StepDownConverterSimulatorTest {
         private ConstantInputVoltage _constantInputVoltage;
         private ConstantOnOffController _constantOnOffController;
         private StepDownConverterParameter _parameter;
@@ -53,7 +53,7 @@ namespace ConverterSimulationTest {
 
             results.Count.Should().BeGreaterThan(0);
             var result = results.Last();
-            result.OutputVoltage.Should().BeApproximately(16.554086e-3, 1e-5);
+            result.OutputVoltage.Should().BeApproximately(0.016400418464987965, 1e-10);
         }
 
         [TestMethod]

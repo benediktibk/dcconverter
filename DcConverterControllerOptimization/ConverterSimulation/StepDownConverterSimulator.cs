@@ -55,12 +55,12 @@ namespace ConverterSimulation {
 
         private StepDownConverterCircuitSimulator CreateCircuitSimulation(bool igbtOn, StepDownConverterInternalState internalState, double inputVoltage, CircuitSimulation.StepDownConverterCircuitSimulator previousCircuit) {
             var realInputVoltage = CalculateRealInputVoltage(igbtOn, inputVoltage);
-            return new CircuitSimulation.StepDownConverterCircuitSimulator(previousCircuit, realInputVoltage, internalState.OutputVoltage, internalState.OutputVoltageGradient);
+            return new StepDownConverterCircuitSimulator(previousCircuit, realInputVoltage, internalState.OutputVoltage, internalState.OutputVoltageGradient);
         }
 
         private StepDownConverterCircuitSimulator CreateFirstCircuitSimulation(bool igbtOn, StepDownConverterInternalState internalState, double inputVoltage) {
             var realInputVoltage = CalculateRealInputVoltage(igbtOn, inputVoltage);
-            var circuit = new CircuitSimulation.CircuitParameter {
+            var circuit = new CircuitParameter {
                 LoadResistor = _parameter.LoadResistor,
                 SeriesResistor = _parameter.SeriesResistor,
                 Inductance = _parameter.Inductance,
