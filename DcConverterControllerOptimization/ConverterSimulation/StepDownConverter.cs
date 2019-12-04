@@ -26,11 +26,12 @@ namespace ConverterSimulation {
                 OutputVoltage = 0,
                 OutputVoltageGradient = 0
             };
+            CircuitSimulation.StepDownConverter circuit;
 
             do {
                 var inputVoltageValue = inputVoltage.GetValue(current);
                 var igbtOn = controller.GetValue(current);
-                var circuit = CreateCircuitSimulation(igbtOn, internalState, inputVoltageValue);
+                circuit = CreateCircuitSimulation(igbtOn, internalState, inputVoltageValue);
                 var nextChangeTimeController = controller.GetNextChangeTime(current);
                 var nextChangeTimeInputVoltage = inputVoltage.GetNextChangeTime(current);
                 var next = Math.Min(nextChangeTimeController, nextChangeTimeInputVoltage);
@@ -39,6 +40,10 @@ namespace ConverterSimulation {
                 results.Add(new OutputVoltageAndTime { Time = current, OutputVoltage = internalState.OutputVoltage });
                 current = next;
             } while (current < time);
+
+            internalState.OutputVoltage = circuit.CalculateOutputVoltage(time);
+            internalState.OutputVoltageGradient = circuit.CalculateOutputVoltageGradient(time);
+            results.Add(new OutputVoltageAndTime { Time = time, OutputVoltage = internalState.OutputVoltage });
 
             return results;
         }

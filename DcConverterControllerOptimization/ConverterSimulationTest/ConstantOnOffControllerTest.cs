@@ -67,7 +67,16 @@ namespace ConverterSimulationTest {
 
             nextChange.Should().BeApproximately(268e-6, 1e-10);
         }
-               
+
+        [TestMethod]
+        public void GetNextChangeTime_ExactBarrierLaterOn_NextOffTime() {
+            var controller = new ConstantOnOffController(20e-6, 114e-6);
+
+            var nextChange = controller.GetNextChangeTime(0.004154);
+
+            nextChange.Should().BeApproximately(0.004174, 1e-10);
+        }
+
         [TestMethod]
         public void GetValue_0_True() {
             var controller = new ConstantOnOffController(0.2, 0.5);
@@ -129,6 +138,15 @@ namespace ConverterSimulationTest {
             var value = controller.GetValue(154e-6);
 
             value.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void GetValue_ExactBarrierLaterOn_True() {
+            var controller = new ConstantOnOffController(20e-6, 114e-6);
+
+            var value = controller.GetValue(0.004154);
+
+            value.Should().BeTrue();
         }
     }
 }
