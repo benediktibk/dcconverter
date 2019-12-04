@@ -14,26 +14,26 @@ namespace ConverterSimulationTest {
         [TestInitialize]
         public void SetUp() {
             _constantInputVoltage = new ConstantInputVoltage(20);
-            _constantOnOffController = new ConstantOnOffController(2e-3, 10e-3);
+            _constantOnOffController = new ConstantOnOffController(20e-6, 114e-6);
             _parameter = new StepDownConverterParameter {
-                Capacitor = 1,
-                Inductance = 1,
-                DiodeForwardVoltage = 1,
-                IgbtForwardVoltage = 1,
-                LoadResistor = 1,
-                SeriesResistor = 1
+                Capacitor = 100e-6,
+                Inductance = 2e-3,
+                DiodeForwardVoltage = 0.67,
+                IgbtForwardVoltage = 2.3,
+                LoadResistor = 10,
+                SeriesResistor = 0.4
             };
             _converter = new StepDownConverter(_parameter);
         }
 
         [TestMethod]
         public void Simulate_StaticInputVoltageAndConstantOnOffTime_CorrectVoltageAtEnd() {
-            var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 10);
+            var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 200e-3);
 
             results.Count.Should().BeGreaterThan(0);
             var result = results.Last();
-            result.Time.Should().BeApproximately(10, 1e-5);
-            result.OutputVoltage.Should().BeApproximately(5, 1e-5);
+            result.Time.Should().BeApproximately(200e-3, 1e-5);
+            result.OutputVoltage.Should().BeApproximately(1.8171461, 1e-3);
         }
     }
 }
