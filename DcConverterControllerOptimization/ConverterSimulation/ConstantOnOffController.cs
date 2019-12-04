@@ -27,26 +27,29 @@ namespace ConverterSimulation {
         #region public functions
 
         public double GetNextChangeTime(double fromTime) {
-            var remainder = CalculateRemainder(fromTime);
-            var onTimeFuzzy = _onTime - _onTime * 1e-5;
-            double result;
-
-            if (remainder < onTimeFuzzy) {
-                result = fromTime - remainder + _onTime;
-            }
-            else {
-                result = fromTime - remainder + _periodTime;
-            }
-
-            return result;
+            return GetCompleteResult(fromTime).NextChangeTime;
         }
 
         public bool GetValue(double time) {
-            var remainder = CalculateRemainder(time);
-            var onTimeFuzzy = _onTime - _onTime * 1e-5;
-            return remainder < onTimeFuzzy;
+            return GetCompleteResult(time).Value;
         }
 
+        public ControllerResult GetCompleteResult(double time) {
+            var remainder = CalculateRemainder(time);
+            var onTimeFuzzy = _onTime - _onTime * 1e-5;
+            double nextChangeTime;
+
+            if (remainder < onTimeFuzzy) {
+                nextChangeTime = time - remainder + _onTime;
+            }
+            else {
+                nextChangeTime = time - remainder + _periodTime;
+            }
+
+            var value = remainder < onTimeFuzzy;
+
+            return new ControllerResult { NextChangeTime = nextChangeTime, Value = value };
+        }
         #endregion
 
         #region private functions
