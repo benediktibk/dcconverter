@@ -2,7 +2,7 @@
 
 namespace CircuitSimulation
 {
-    public class ResistorInSeriesAndCapacitor : ICircuitSimulator
+    public class ResistorInSeriesAndCapacitorCircuitSimulator : ICircuitSimulator
     {
         #region private variables
 
@@ -16,7 +16,7 @@ namespace CircuitSimulation
 
         #region constructor
 
-        public ResistorInSeriesAndCapacitor(double loadResistor, double seriesResistor, double capacitor, double outputVoltageInitial, double inputVoltage) {
+        public ResistorInSeriesAndCapacitorCircuitSimulator(double loadResistor, double seriesResistor, double capacitor, double outputVoltageInitial, double inputVoltage) {
             _loadResistor = loadResistor;
             _seriesResistor = seriesResistor;
             _capacitor = capacitor;

@@ -10,7 +10,7 @@ namespace ConverterSimulationTest {
         private ConstantInputVoltage _constantInputVoltage;
         private ConstantOnOffController _constantOnOffController;
         private StepDownConverterParameter _parameter;
-        private StepDownConverter _converter;
+        private StepDownConverterSimulator _converter;
 
         [TestInitialize]
         public void SetUp() {
@@ -24,7 +24,7 @@ namespace ConverterSimulationTest {
                 LoadResistor = 10,
                 SeriesResistor = 0.4
             };
-            _converter = new StepDownConverter(_parameter);
+            _converter = new StepDownConverterSimulator(_parameter);
         }
 
         [TestMethod]

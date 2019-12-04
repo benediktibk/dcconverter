@@ -2,7 +2,7 @@
 
 namespace CircuitSimulation
 {
-    public class StepDownConverter : ICircuitSimulator
+    public class StepDownConverterCircuitSimulator : ICircuitSimulator
     {
         #region private variables
 
@@ -16,7 +16,7 @@ namespace CircuitSimulation
 
         #region constructors
 
-        public StepDownConverter(Circuit circuit) {
+        public StepDownConverterCircuitSimulator(CircuitParameter circuit) {
             _alpha = circuit.Inductance * circuit.Capacitor;
             _beta = (circuit.Inductance + circuit.SeriesResistor * circuit.LoadResistor * circuit.Capacitor) / circuit.LoadResistor;
             _gamma = (circuit.LoadResistor + circuit.SeriesResistor) / circuit.LoadResistor;
@@ -24,7 +24,7 @@ namespace CircuitSimulation
             _internalCircuit = CreateInternalCircuit(circuit.InputVoltage, circuit.OutputVoltageInitial, circuit.OutputVoltageGradientInitial, _alpha, _beta, _gamma, _radicand);
         }
 
-        public StepDownConverter(StepDownConverter converter, double inputVoltage, double initialOutputVoltage, double initialOutputVoltageGradient) {
+        public StepDownConverterCircuitSimulator(StepDownConverterCircuitSimulator converter, double inputVoltage, double initialOutputVoltage, double initialOutputVoltageGradient) {
             _alpha = converter._alpha;
             _beta = converter._beta;
             _gamma = converter._gamma;
@@ -50,9 +50,9 @@ namespace CircuitSimulation
 
         private static ICircuitSimulator CreateInternalCircuit(double inputVoltage, double initialOutputVoltage, double initialOutputVoltageGradient, double alpha, double beta, double gamma, double radicand) {
             if (radicand > 0)
-                return new StepDownConverterAperiodic(initialOutputVoltage, initialOutputVoltageGradient, inputVoltage, alpha, beta, gamma, radicand);
+                return new StepDownConverterAperiodicCircuitSimulator(initialOutputVoltage, initialOutputVoltageGradient, inputVoltage, alpha, beta, gamma, radicand);
             else if (radicand < 0)
-                return new StepDownConverterPeriodic(initialOutputVoltage, initialOutputVoltageGradient, inputVoltage, alpha, beta, gamma, radicand);
+                return new StepDownConverterPeriodicCircuitSimulator(initialOutputVoltage, initialOutputVoltageGradient, inputVoltage, alpha, beta, gamma, radicand);
             else
                 throw new NotImplementedException("aperiodic edge case is not implemented");
         }

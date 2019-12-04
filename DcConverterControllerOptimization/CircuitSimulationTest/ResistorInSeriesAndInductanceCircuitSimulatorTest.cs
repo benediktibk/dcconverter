@@ -5,11 +5,10 @@ using FluentAssertions;
 namespace CircuitSimulationTest
 {
     [TestClass]
-    public class ResistorInSeriesAndInductanceTest
-    {
+    public class ResistorInSeriesAndInductanceCircuitSimulatorTest {
         [TestMethod]
         public void CalculateOutputVoltage_0InitialVoltage253ms_CorrectVoltage() {
-            var circuit = new ResistorInSeriesAndInductance(2, 3, 0.9, 0, 10);
+            var circuit = new ResistorInSeriesAndInductanceCircuitSimulator(2, 3, 0.9, 0, 10);
 
             var outputVoltage = circuit.CalculateOutputVoltage(0.253018705);
 
@@ -18,7 +17,7 @@ namespace CircuitSimulationTest
 
         [TestMethod]
         public void CalculateOutputVoltage_2InitialVoltage143ms_CorrectVoltage() {
-            var circuit = new ResistorInSeriesAndInductance(2, 3, 0.9, 2, 10);
+            var circuit = new ResistorInSeriesAndInductanceCircuitSimulator(2, 3, 0.9, 2, 10);
 
             var outputVoltage = circuit.CalculateOutputVoltage(0.14350996);
 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CircuitSimulation
+﻿namespace CircuitSimulation
 {
-    public class Circuit
+    public class CircuitParameter
     {
         #region properties
 

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CircuitSimulation;
+using System;
 using System.Collections.Generic;
 
 namespace ConverterSimulation {
-    public class StepDownConverter {
+    public class StepDownConverterSimulator {
         #region private variables
 
         private readonly StepDownConverterParameter _parameter;
@@ -11,7 +12,7 @@ namespace ConverterSimulation {
 
         #region constructor
 
-        public StepDownConverter(StepDownConverterParameter parameter) {
+        public StepDownConverterSimulator(StepDownConverterParameter parameter) {
             _parameter = parameter;
         }
 
@@ -28,7 +29,7 @@ namespace ConverterSimulation {
             };
             var inputVoltageValue = inputVoltage.GetCompleteResult(current).Value;
             var igbtOn = controller.GetCompleteResult(current).Value;
-            CircuitSimulation.StepDownConverter circuit = CreateFirstCircuitSimulation(igbtOn, internalState, inputVoltageValue);
+            var circuit = CreateFirstCircuitSimulation(igbtOn, internalState, inputVoltageValue);
 
             do {
                 var inputVoltageResult = inputVoltage.GetCompleteResult(current);
@@ -52,14 +53,14 @@ namespace ConverterSimulation {
 
         #region private functions
 
-        private CircuitSimulation.StepDownConverter CreateCircuitSimulation(bool igbtOn, StepDownConverterInternalState internalState, double inputVoltage, CircuitSimulation.StepDownConverter previousCircuit) {
+        private StepDownConverterCircuitSimulator CreateCircuitSimulation(bool igbtOn, StepDownConverterInternalState internalState, double inputVoltage, CircuitSimulation.StepDownConverterCircuitSimulator previousCircuit) {
             var realInputVoltage = CalculateRealInputVoltage(igbtOn, inputVoltage);
-            return new CircuitSimulation.StepDownConverter(previousCircuit, realInputVoltage, internalState.OutputVoltage, internalState.OutputVoltageGradient);
+            return new CircuitSimulation.StepDownConverterCircuitSimulator(previousCircuit, realInputVoltage, internalState.OutputVoltage, internalState.OutputVoltageGradient);
         }
 
-        private CircuitSimulation.StepDownConverter CreateFirstCircuitSimulation(bool igbtOn, StepDownConverterInternalState internalState, double inputVoltage) {
+        private StepDownConverterCircuitSimulator CreateFirstCircuitSimulation(bool igbtOn, StepDownConverterInternalState internalState, double inputVoltage) {
             var realInputVoltage = CalculateRealInputVoltage(igbtOn, inputVoltage);
-            var circuit = new CircuitSimulation.Circuit {
+            var circuit = new CircuitSimulation.CircuitParameter {
                 LoadResistor = _parameter.LoadResistor,
                 SeriesResistor = _parameter.SeriesResistor,
                 Inductance = _parameter.Inductance,
@@ -69,7 +70,7 @@ namespace ConverterSimulation {
                 InputVoltage = realInputVoltage
             };
 
-            return new CircuitSimulation.StepDownConverter(circuit);
+            return new StepDownConverterCircuitSimulator(circuit);
         }
 
         private double CalculateRealInputVoltage(bool igbtOn, double inputVoltage) {
