@@ -29,12 +29,12 @@ namespace ConverterSimulationTest {
 
         [TestMethod]
         public void Simulate_StaticInputVoltageAndConstantOnOffTime_CorrectVoltageAtEnd() {
-            var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 200e-3);
+            var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 100e-3);
 
             results.Count.Should().BeGreaterThan(0);
             var result = results.Last();
-            result.Time.Should().BeApproximately(200e-3, 1e-8);
-            result.OutputVoltage.Should().BeApproximately(2.4042732, 1e-3);
+            result.Time.Should().BeApproximately(100e-3, 1e-8);
+            result.OutputVoltage.Should().BeApproximately(1.9924452, 1e-3);
         }
 
         [TestMethod]
