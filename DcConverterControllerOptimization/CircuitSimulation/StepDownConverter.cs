@@ -7,23 +7,29 @@ namespace CircuitSimulation
         #region private variables
 
         private readonly ICircuitSimulator _internalCircuit;
+        private readonly double _alpha;
+        private readonly double _beta;
+        private readonly double _gamma;
+        private readonly double _radicand;
 
         #endregion
 
-        #region constructor
+        #region constructors
 
         public StepDownConverter(Circuit circuit) {
-            var alpha = circuit.Inductance * circuit.Capacitor;
-            var beta = (circuit.Inductance + circuit.SeriesResistor * circuit.LoadResistor * circuit.Capacitor) / circuit.LoadResistor;
-            var gamma = (circuit.LoadResistor + circuit.SeriesResistor) / circuit.LoadResistor;
-            var radicand = beta * beta - 4 * alpha * gamma;
+            _alpha = circuit.Inductance * circuit.Capacitor;
+            _beta = (circuit.Inductance + circuit.SeriesResistor * circuit.LoadResistor * circuit.Capacitor) / circuit.LoadResistor;
+            _gamma = (circuit.LoadResistor + circuit.SeriesResistor) / circuit.LoadResistor;
+            _radicand = _beta * _beta - 4 * _alpha * _gamma;
+            _internalCircuit = CreateInternalCircuit(circuit.InputVoltage, circuit.OutputVoltageInitial, circuit.OutputVoltageGradientInitial, _alpha, _beta, _gamma, _radicand);
+        }
 
-            if (radicand > 0)
-                _internalCircuit = new StepDownConverterAperiodic(circuit.OutputVoltageInitial, circuit.OutputVoltageGradientInitial, circuit.InputVoltage, alpha, beta, gamma, radicand);
-            else if (radicand < 0)
-                _internalCircuit = new StepDownConverterPeriodic(circuit.OutputVoltageInitial, circuit.OutputVoltageGradientInitial, circuit.InputVoltage, alpha, beta, gamma, radicand);
-            else
-                throw new NotImplementedException("aperiodic edge case is not implemented");
+        public StepDownConverter(StepDownConverter converter, double inputVoltage, double initialOutputVoltage, double initialOutputVoltageGradient) {
+            _alpha = converter._alpha;
+            _beta = converter._beta;
+            _gamma = converter._gamma;
+            _radicand = converter._radicand;
+            _internalCircuit = CreateInternalCircuit(inputVoltage, initialOutputVoltage, initialOutputVoltageGradient, _alpha, _beta, _gamma, _radicand);
         }
 
         #endregion
@@ -36,6 +42,19 @@ namespace CircuitSimulation
 
         public double CalculateOutputVoltageGradient(double time) {
             return _internalCircuit.CalculateOutputVoltageGradient(time);
+        }
+
+        #endregion
+
+        #region
+
+        private static ICircuitSimulator CreateInternalCircuit(double inputVoltage, double initialOutputVoltage, double initialOutputVoltageGradient, double alpha, double beta, double gamma, double radicand) {
+            if (radicand > 0)
+                return new StepDownConverterAperiodic(initialOutputVoltage, initialOutputVoltageGradient, inputVoltage, alpha, beta, gamma, radicand);
+            else if (radicand < 0)
+                return new StepDownConverterPeriodic(initialOutputVoltage, initialOutputVoltageGradient, inputVoltage, alpha, beta, gamma, radicand);
+            else
+                throw new NotImplementedException("aperiodic edge case is not implemented");
         }
 
         #endregion
