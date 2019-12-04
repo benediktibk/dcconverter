@@ -38,6 +38,16 @@ namespace ConverterSimulationTest {
         }
 
         [TestMethod]
+        public void Simulate_StaticInputVoltageAndConstantOnOffTime_CorrectVoltageAtStart() {
+            var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 0);
+
+            results.Count.Should().BeGreaterThan(0);
+            var result = results.Last();
+            result.Time.Should().BeApproximately(0, 1e-5);
+            result.OutputVoltage.Should().BeApproximately(0, 1e-3);
+        }
+
+        [TestMethod]
         public void Simulate_StaticInputVoltageAndConstantOnOffTime10ms_CorrectTimeSteps() {
             var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 10e-3);
 
