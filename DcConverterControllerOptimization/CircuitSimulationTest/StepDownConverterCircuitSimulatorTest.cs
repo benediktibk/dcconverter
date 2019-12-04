@@ -39,7 +39,7 @@ namespace CircuitSimulationTest
                 Inductance = 2e-3,
                 OutputVoltageInitial = 0,
                 OutputVoltageGradientInitial = 0,
-                InputVoltage = 16.7
+                InputVoltage = 17.7
             };
         }
 
@@ -194,7 +194,7 @@ namespace CircuitSimulationTest
 
             var outputVoltage = circuit.CalculateOutputVoltage(20e-6);
 
-            outputVoltage.Should().BeApproximately(16.554086e-3, 2e-4);
+            outputVoltage.Should().BeApproximately(17.545156e-3, 2e-4);
         }
     }
 }
