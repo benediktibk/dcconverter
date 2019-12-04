@@ -207,17 +207,30 @@ namespace CircuitSimulationTest
 
             var outputVoltage = circuit2.CalculateOutputVoltage(134e-6);
 
-            outputVoltage.Should().BeApproximately(180.57665e-3, 2e-4);
+            outputVoltage.Should().BeApproximately(180.57507e-3, 2e-4);
         }
 
         [TestMethod]
-        public void CalculateOutputVoltage_Realistic910us_CorrectVoltage() {
+        public void CalculateOutputVoltage_RealisticWithPulseInMiddleOfPulse_CorrectVoltage() {
+            var circuit1 = new StepDownConverterCircuitSimulator(_realisticCircuit);
+            _realisticCircuit.OutputVoltageInitial = circuit1.CalculateOutputVoltage(20e-6);
+            _realisticCircuit.OutputVoltageGradientInitial = circuit1.CalculateOutputVoltageGradient(20e-6);
+            _realisticCircuit.InputVoltage = -0.67;
+            var circuit2 = new StepDownConverterCircuitSimulator(_realisticCircuit);
+
+            var outputVoltage = circuit2.CalculateOutputVoltage(86.565217e-6);
+
+            outputVoltage.Should().BeApproximately(121.54345e-3, 2e-4);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_Realistic1ms_CorrectVoltage() {
             _realisticCircuit.InputVoltage = 20;
             var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
 
-            var outputVoltage = circuit.CalculateOutputVoltage(910.88251e-6);
+            var outputVoltage = circuit.CalculateOutputVoltage(1e-3);
 
-            outputVoltage.Should().BeApproximately(20.967054, 1e-3);
+            outputVoltage.Should().BeApproximately(23.117226, 1e-2);
         }
 
         [TestMethod]
@@ -228,6 +241,28 @@ namespace CircuitSimulationTest
             var outputVoltage = circuit.CalculateOutputVoltage(0.1);
 
             outputVoltage.Should().BeApproximately(19.23077, 1e-5);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_RealisticWithoutSeriesResistor100ms_CorrectVoltage() {
+            _realisticCircuit.InputVoltage = 20;
+            _realisticCircuit.SeriesResistor = 0;
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltage(0.1);
+
+            outputVoltage.Should().BeApproximately(20, 1e-5);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_RealisticWithoutSeriesResistor1ms_CorrectVoltage() {
+            _realisticCircuit.InputVoltage = 20;
+            _realisticCircuit.SeriesResistor = 0;
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltage(1.4424837e-3);
+
+            outputVoltage.Should().BeApproximately(29.727866, 1e-2);
         }
     }
 }
