@@ -33,7 +33,7 @@ namespace CircuitSimulationTest
             };
 
             _realisticCircuit = new CircuitParameter {
-                LoadResistor = 4,
+                LoadResistor = 10,
                 SeriesResistor = 0.4,
                 Capacitor = 100e-6,
                 Inductance = 2e-3,
