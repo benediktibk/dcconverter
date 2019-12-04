@@ -8,6 +8,7 @@ namespace CircuitSimulationTest
     public class StepDownConverterCircuitSimulatorTest {
         private CircuitParameter _aperiodicCircuit;
         private CircuitParameter _periodicCircuit;
+        private CircuitParameter _realisticCircuit;
 
         [TestInitialize]
         public void Setup() {
@@ -29,6 +30,16 @@ namespace CircuitSimulationTest
                 OutputVoltageInitial = 0,
                 OutputVoltageGradientInitial = 0,
                 InputVoltage = 10
+            };
+
+            _realisticCircuit = new CircuitParameter {
+                LoadResistor = 4,
+                SeriesResistor = 0.4,
+                Capacitor = 100e-6,
+                Inductance = 2e-3,
+                OutputVoltageInitial = 0,
+                OutputVoltageGradientInitial = 0,
+                InputVoltage = 16.7
             };
         }
 
@@ -175,6 +186,15 @@ namespace CircuitSimulationTest
             var outputVoltageGradient = circuit.CalculateOutputVoltageGradient(1000);
 
             outputVoltageGradient.Should().BeApproximately(0, 1e-3);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_Realistic0us_CorrectVoltage() {
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+
+            var outputVoltage = circuit.CalculateOutputVoltage(20e-6);
+
+            outputVoltage.Should().BeApproximately(16.554086e-3, 2e-4);
         }
     }
 }
