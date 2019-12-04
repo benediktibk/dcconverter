@@ -32,14 +32,17 @@ namespace ConverterSimulation {
             var circuit = CreateFirstCircuitSimulation(igbtOn, internalState, inputVoltageValue);
 
             do {
+                circuit = CreateCircuitSimulation(igbtOn, internalState, inputVoltageValue, circuit);
+                internalState.OutputVoltage = circuit.CalculateOutputVoltage(current);
+                internalState.OutputVoltageGradient = circuit.CalculateOutputVoltageGradient(current);
+                results.Add(new OutputVoltageAndTime { Time = current, OutputVoltage = internalState.OutputVoltage });
+
                 var inputVoltageResult = inputVoltage.GetCompleteResult(current);
                 var controllerResult = controller.GetCompleteResult(current);
-                circuit = CreateCircuitSimulation(controllerResult.Value, internalState, inputVoltageResult.Value, circuit);
                 var next = Math.Min(controllerResult.NextChangeTime, inputVoltageResult.NextChangeTime);
-                internalState.OutputVoltage = circuit.CalculateOutputVoltage(next - current);
-                internalState.OutputVoltageGradient = circuit.CalculateOutputVoltageGradient(next - current);
-                results.Add(new OutputVoltageAndTime { Time = current, OutputVoltage = internalState.OutputVoltage });
                 current = next;
+                igbtOn = controllerResult.Value;
+                inputVoltageValue = inputVoltageResult.Value;
             } while (current < time);
 
             internalState.OutputVoltage = circuit.CalculateOutputVoltage(time);
