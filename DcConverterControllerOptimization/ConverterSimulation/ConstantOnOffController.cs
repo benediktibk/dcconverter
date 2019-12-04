@@ -30,7 +30,7 @@ namespace ConverterSimulation {
             var quotient = (int)(fromTime / _periodTime);
             var remainder = fromTime - quotient * _periodTime;
             return
-                remainder < _onTime ?
+                remainder < _onTime - _onTime * 1e-4 ?
                     fromTime - remainder + _onTime :
                     fromTime - remainder + _periodTime;
         }
