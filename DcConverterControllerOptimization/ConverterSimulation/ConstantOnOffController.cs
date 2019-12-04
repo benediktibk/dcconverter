@@ -31,8 +31,8 @@ namespace ConverterSimulation {
             var remainder = fromTime - quotient * _periodTime;
             return
                 remainder < _onTime ?
-                    fromTime + _onTime :
-                    fromTime + _periodTime;
+                    fromTime - remainder + _onTime :
+                    fromTime - remainder + _periodTime;
         }
 
         public bool GetValue(double time) {
