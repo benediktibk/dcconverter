@@ -27,18 +27,40 @@ namespace ConverterSimulation {
         #region public functions
 
         public double GetNextChangeTime(double fromTime) {
-            var quotient = (int)(fromTime / _periodTime);
-            var remainder = fromTime - quotient * _periodTime;
-            return
-                remainder < _onTime - _onTime * 1e-4 ?
-                    fromTime - remainder + _onTime :
-                    fromTime - remainder + _periodTime;
+            var remainder = CalculateRemainder(fromTime);
+            var onTimeFuzzy = _onTime - _onTime * 1e-5;
+            double result;
+
+            if (remainder < onTimeFuzzy) {
+                result = fromTime - remainder + _onTime;
+            }
+            else {
+                result = fromTime - remainder + _periodTime;
+            }
+
+            return result;
         }
 
         public bool GetValue(double time) {
-            var quotient = (int)(time / _periodTime);
-            var remainder = time - quotient * _periodTime;
-            return remainder < _onTime - _onTime * 1e-4;
+            var remainder = CalculateRemainder(time);
+            var onTimeFuzzy = _onTime - _onTime * 1e-5;
+            return remainder < onTimeFuzzy;
+        }
+
+        #endregion
+
+        #region private functions
+
+        private double CalculateRemainder(double time) {
+            var quotientDouble = time / _periodTime;
+            var quotient = (int)quotientDouble;
+            var quotientDifference = quotientDouble - quotient;
+
+            if (quotientDifference > 1 - 1e-5) {
+                quotient++;
+            }
+
+            return time - quotient * _periodTime;
         }
 
         #endregion
