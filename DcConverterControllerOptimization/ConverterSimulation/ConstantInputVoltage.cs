@@ -24,6 +24,10 @@
             return _voltage;
         }
 
+        public InputVoltageResult GetCompleteResult(double time) {
+            return new InputVoltageResult { NextChangeTime = GetNextChangeTime(time), Value = GetValue(time) };
+        }
+
         #endregion
     }
 }
