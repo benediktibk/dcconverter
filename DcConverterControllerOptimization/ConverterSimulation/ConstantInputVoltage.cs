@@ -16,6 +16,14 @@
 
         #region public functions
 
+        public double GetNextChangeTime(double fromTime) {
+            return double.MaxValue;
+        }
+
+        public double GetValue(double time) {
+            return _voltage;
+        }
+
         #endregion
     }
 }
