@@ -53,7 +53,7 @@ namespace ConverterSimulationTest {
 
             results.Count.Should().BeGreaterThan(0);
             var result = results.Last();
-            result.OutputVoltage.Should().BeApproximately(15.887933e-3, 1e-5);
+            result.OutputVoltage.Should().BeApproximately(16.554086e-3, 1e-5);
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace ConverterSimulationTest {
 
             results.Count.Should().Be(3);
             results[1].Time.Should().BeApproximately(20e-6, 1e-10);
-            results[1].OutputVoltage.Should().BeApproximately(15.887933e-3, 1e-5);
+            results[1].OutputVoltage.Should().BeApproximately(16.554086e-3, 1e-5);
         }
 
         [TestMethod]
