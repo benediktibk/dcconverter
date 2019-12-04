@@ -31,8 +31,8 @@ namespace ConverterSimulation {
                 var inputVoltageValue = inputVoltage.GetValue(current);
                 var igbtOn = controller.GetValue(current);
                 var circuit = CreateCircuitSimulation(igbtOn, internalState, inputVoltageValue);
-                var nextChangeTimeController = controller.GetNextChangeTime(0);
-                var nextChangeTimeInputVoltage = inputVoltage.GetNextChangeTime(0);
+                var nextChangeTimeController = controller.GetNextChangeTime(current);
+                var nextChangeTimeInputVoltage = inputVoltage.GetNextChangeTime(current);
                 var next = Math.Min(nextChangeTimeController, nextChangeTimeInputVoltage);
                 internalState.OutputVoltage = circuit.CalculateOutputVoltage(next - current);
                 internalState.OutputVoltageGradient = circuit.CalculateOutputVoltageGradient(next - current);
