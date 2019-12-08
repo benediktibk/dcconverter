@@ -20,7 +20,7 @@ namespace ConverterSimulation {
 
         #region public functions
 
-        public List<OutputVoltageAndTime> Simulate(IInputVoltage inputVoltage, IController controller, double time) {
+        public List<OutputVoltageAndTime> Simulate(IInputVoltage inputVoltage, IController controller, double time, double minimumTimeStep = Double.MaxValue) {
             var results = new List<OutputVoltageAndTime>();
             var current = 0.0;
             var internalState = new StepDownConverterInternalState {
@@ -40,6 +40,7 @@ namespace ConverterSimulation {
                 var inputVoltageResult = inputVoltage.GetCompleteResult(current);
                 var controllerResult = controller.GetCompleteResult(current);
                 var next = Math.Min(controllerResult.NextChangeTime, inputVoltageResult.NextChangeTime);
+                next = Math.Min(next, current + minimumTimeStep);
                 current = next;
                 igbtOn = controllerResult.Value;
                 inputVoltageValue = inputVoltageResult.Value;
