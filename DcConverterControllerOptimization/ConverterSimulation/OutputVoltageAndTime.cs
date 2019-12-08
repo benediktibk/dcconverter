@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -29,10 +30,12 @@ namespace ConverterSimulation {
 
                 while (!file.EndOfStream) {
                     var line = file.ReadLine();
-                    var match = Regex.Match(line, @"[^;]*;[^;]*");
+                    var match = Regex.Match(line, @"([^;]*);([^;]*)");
 
-                    var time = double.Parse(match.Groups[1].Value);
-                    var value = double.Parse(match.Groups[2].Value);
+                    var timePart = match.Groups[1].Value;
+                    var valuePart = match.Groups[2].Value;
+                    var time = double.Parse(timePart, CultureInfo.InvariantCulture);
+                    var value = double.Parse(valuePart, CultureInfo.InvariantCulture);
                     result.Add(new OutputVoltageAndTime() { Time = time, OutputVoltage = value });
                 }
 
