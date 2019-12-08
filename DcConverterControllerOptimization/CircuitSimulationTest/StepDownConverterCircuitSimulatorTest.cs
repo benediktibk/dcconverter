@@ -216,7 +216,9 @@ namespace CircuitSimulationTest
             var secondValue = 19.834972e-3;
             outputVoltageFirst.Should().BeApproximately(firstValue, 1e-4);
             outputVoltageSecond.Should().BeApproximately(secondValue, 1e-4);
-            outputVoltageGradient.Should().BeApproximately((secondValue - firstValue)/(timeSecondValue - timeFirstValue), 1e-4);
+            var expectedValue = (secondValue - firstValue) / (timeSecondValue - timeFirstValue);
+            var relativeError = Math.Abs((outputVoltageGradient - expectedValue) / expectedValue);
+            relativeError.Should().BeApproximately(0, 1e-2);
         }
 
         [TestMethod]
