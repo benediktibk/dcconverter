@@ -30,7 +30,7 @@ namespace CircuitSimulation
             _beta = beta;
             _gamma = gamma;
             _radicand = radicand;
-            _a = (-1) * _beta / (2 * _alpha);
+            _a = _beta / ((-2) * _alpha);
             _b = Math.Sqrt((-1) * _radicand) / (2 * _alpha);
             _k1 = _outputVoltageInitial - _inputVoltage / _gamma;
             _k2 = (_outputVoltageGradientInitial - _a * _k1) / _b;

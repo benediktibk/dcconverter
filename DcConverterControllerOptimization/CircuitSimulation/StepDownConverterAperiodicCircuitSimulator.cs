@@ -30,12 +30,12 @@ namespace CircuitSimulation
             _beta = beta;
             _gamma = gamma;
             _radicand = radicand;
-            _lambda1 = ((-1) * _beta + Math.Sqrt(_radicand)) / (2 * _alpha);
-            _lambda2 = ((-1) * _beta - Math.Sqrt(_radicand)) / (2 * _alpha);
+            _lambda1 = (Math.Sqrt(_radicand) - _beta) / (2 * _alpha);
+            _lambda2 = (_beta + Math.Sqrt(_radicand)) / ((-2) * _alpha);
             _k2 =
                 (_outputVoltageGradientInitial - _lambda1 * _outputVoltageInitial + _inputVoltage * _lambda1 / _gamma) /
                 (_lambda2 - _lambda1);
-            _k1 = _outputVoltageGradientInitial / _lambda1 - _lambda2 / _lambda1 * _k2;
+            _k1 = (_outputVoltageGradientInitial - _lambda2 * _k2) / _lambda1;
         }
 
         #endregion
