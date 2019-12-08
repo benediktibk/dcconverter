@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CircuitSimulation\CircuitSimulation.csproj" />
+    <ProjectReference Include="..\ConverterSimulation\ConverterSimulation.csproj" />
   </ItemGroup>
 
 </Project>

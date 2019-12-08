@@ -1,6 +1,10 @@
 using CircuitSimulation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
+using System.Collections.Generic;
+using ConverterSimulation;
+using System.Linq;
+using System;
 
 namespace CircuitSimulationTest
 {
@@ -213,6 +217,24 @@ namespace CircuitSimulationTest
             outputVoltageFirst.Should().BeApproximately(firstValue, 1e-4);
             outputVoltageSecond.Should().BeApproximately(secondValue, 1e-4);
             outputVoltageGradient.Should().BeApproximately((secondValue - firstValue)/(timeSecondValue - timeFirstValue), 1e-4);
+        }
+
+        [TestMethod]
+        public void CalculateOutputVoltage_Realistic_CorrectVoltageCurve() {
+            var circuit = new StepDownConverterCircuitSimulator(_realisticCircuit);
+            var results = new List<OutputVoltageAndTime>();
+
+            for (var time = 0.0; time <= 10e-3; time += 1e-9) {
+                var value = circuit.CalculateOutputVoltage(time);
+                results.Add(new OutputVoltageAndTime { Time = time, OutputVoltage = value });
+            }
+
+            var expectedResults = OutputVoltageAndTime.ReadFromCsv("testdata/StepDownConverterRealisticValues.csv");
+            var expectedResultsCombined = OutputVoltageAndTime.MatchClosestTimesOfSecondOne(results, expectedResults);
+
+            foreach (var result in expectedResultsCombined) {
+                result.Item1.OutputVoltage.Should().BeApproximately(result.Item2.OutputVoltage, 1e-6);
+            }
         }
 
         [TestMethod]
