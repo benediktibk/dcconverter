@@ -40,7 +40,6 @@ namespace ConverterSimulationTest {
         [TestMethod]
         public void Simulate_StaticInputVoltageAndConstantOnOffTimeWithMinimumTimeStep_CorrectVoltageAtEnd() {
             var results = _converter.Simulate(_constantInputVoltage, _constantOnOffController, 10e-3, 1e-6);
-            OutputVoltageAndTime.WriteToCsv(results, "C:\\temp\\output.csv");
 
             results.Count.Should().BeGreaterThan(0);
             var result = results.Last();
