@@ -49,11 +49,15 @@ namespace ConverterSimulation {
 
             var secondPosition = 0;
             for (var i = 0; i < firstSorted.Count(); ++i) {
-                while (secondSorted[secondPosition + 1].Time < firstSorted[i].Time && secondPosition + 1 < secondSorted.Count()) {
+                while (
+                    secondPosition + 1 < secondSorted.Count() &&
+                    secondSorted[secondPosition + 1].Time < firstSorted[i].Time) {
                     secondPosition++;
                 }
 
-                if (Math.Abs(firstSorted[i].Time - secondSorted[secondPosition].Time) > Math.Abs(firstSorted[i].Time - secondSorted[secondPosition + 1].Time)) {
+                if (
+                    secondPosition + 1 < secondSorted.Count() &&
+                    Math.Abs(firstSorted[i].Time - secondSorted[secondPosition].Time) > Math.Abs(firstSorted[i].Time - secondSorted[secondPosition + 1].Time)) {
                     secondPosition++;
                 }
 
