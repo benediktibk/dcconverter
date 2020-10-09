@@ -1,7 +1,8 @@
-bool state = false;
-
 void setup() {
+  pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
+  digitalWrite(12, false);
+  digitalWrite(13, false);
 
   // as we use a 16MHZ clock the PLL input frequency has to be divided by 2
   PLLCSR |= (1<<PINDIV);
@@ -12,10 +13,10 @@ void setup() {
   bool locked = false;
   do {
     locked = PLLCSR & (1<<PLOCK);
+    digitalWrite(12, true);
   } while (!locked);
 
   // configure the PLL frequency
-  PLLFRQ = 0;
   PLLFRQ |= (0<<PINMUX);
   // divide the PLL frequency by 2 for the USB module -> 48 MHz
   PLLFRQ |= (1<<PLLUSB);
@@ -25,18 +26,18 @@ void setup() {
   // set the PLL frequency to 96MHz
   PLLFRQ |= (0<<PDIV0);
   PLLFRQ |= (1<<PDIV1);
-  PLLFRQ |= (1<<PDIV2);
+  PLLFRQ |= (0<<PDIV2);
   PLLFRQ |= (1<<PDIV3);
 
   // count up to the value of OCR4C
   TCCR4D = 0;
 
   // set compare value A of timer 4 t0 100
-  OCR4A = 100;
+  OCR4A = 67;
   
-  // set 1000 as the maximum value of timer 4
-  TC4H = 0x03;
-  OCR4C = 0xE8;
+  // set 671 as the maximum value of timer 4
+  TC4H = 0x02;
+  OCR4C = 0x9F;
 
   TIMSK4 = 0;
   // activate timer 4 interrupt when it the value reaches OCR4A
@@ -44,7 +45,7 @@ void setup() {
   // activate timer 4 interrupt when it returns to 0
   TIMSK4 |= (1<<TOIE4);
   
-  // set the prescaler of timer 4 to /1 -> 59,604 ns per count
+  // set the prescaler of timer 4 to /1 at an input frequency (set further above via PLL to 64 MHz) -> 14,901 ns per count
   TCCR4B = 0;
   TCCR4B |= (1<<CS40);
   TCCR4B |= (0<<CS41);
@@ -56,13 +57,12 @@ void setup() {
 }
 
 void loop() { 
-  digitalWrite(13, state);
 }
 
 ISR(TIMER4_OVF_vect){
-  state = true;
+  digitalWrite(13, true);
 }
 
 ISR(TIMER4_COMPA_vect){
-  state = false;
+  digitalWrite(13, false);
 }
