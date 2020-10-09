@@ -1,31 +1,10 @@
-void setPin(int pin, bool value) {
-  switch (pin) {
-    case 12:
-      if (value) {
-        PORTD |= (1<<PORTD6);
-      }
-      else {
-        PORTD &= ~(1<<PORTD6);
-      }
-      break;
-    case 13:
-      if (value) {
-        PORTC |= (1<<PORTC7);
-      }
-      else {
-        PORTC &= ~(1<<PORTC7);
-      }
-      break;
-    default:
-      break;
-  }
-}
+#define SETBIT(TARGET, TARGETBIT) TARGET |= (1<<TARGETBIT)
+#define UNSETBIT(TARGET, TARGETBIT) TARGET &= ~(1<<TARGETBIT)
 
 void setup() {
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
-  setPin(12, false);
-  setPin(13, false);
+  digitalWrite(12, false);
 
   // as we use a 16MHZ clock the PLL input frequency has to be divided by 2
   PLLCSR |= (1<<PINDIV);
@@ -36,7 +15,7 @@ void setup() {
   bool locked = false;
   do {
     locked = PLLCSR & (1<<PLOCK);
-    setPin(12, true);
+    digitalWrite(12, true);
   } while (!locked);
 
   // configure the PLL frequency
@@ -83,9 +62,9 @@ void loop() {
 }
 
 ISR(TIMER4_OVF_vect){
-  setPin(13, true);
+  SETBIT(PORTC, PORTC7);
 }
 
 ISR(TIMER4_COMPA_vect){
-  setPin(13, false);
+  UNSETBIT(PORTC, PORTC7);
 }
