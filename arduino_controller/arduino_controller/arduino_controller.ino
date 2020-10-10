@@ -3,7 +3,6 @@
 
 void setup() {
   pinMode(12, OUTPUT);
-  pinMode(13, OUTPUT);
   digitalWrite(12, false);
 
   // as we use a 16MHZ clock the PLL input frequency has to be divided by 2
@@ -34,18 +33,12 @@ void setup() {
   // count up to the value of OCR4C
   TCCR4D = 0;
 
-  // set compare value A of timer 4 t0 100
+  // set compare value A of timer 4 to 67
   OCR4A = 67;
   
   // set 671 as the maximum value of timer 4
   TC4H = 0x02;
   OCR4C = 0x9F;
-
-  TIMSK4 = 0;
-  // activate timer 4 interrupt when it the value reaches OCR4A
-  TIMSK4 |= (1<<OCIE4A);
-  // activate timer 4 interrupt when it returns to 0
-  TIMSK4 |= (1<<TOIE4);
   
   // set the prescaler of timer 4 to /1 at an input frequency (set further above via PLL to 64 MHz) -> 14,901 ns per count
   TCCR4B = 0;
@@ -53,18 +46,11 @@ void setup() {
   TCCR4B |= (0<<CS41);
   TCCR4B |= (0<<CS42);
   TCCR4B |= (0<<CS43);
-  
-  // allow interrupts
-  sei();
+
+  // set the pin OC4A to high when the value in OCR4A is reached
+  TCCR4A |= (0<<COM4A0);
+  TCCR4A |= (1<<COM4A1);
 }
 
 void loop() { 
-}
-
-ISR(TIMER4_OVF_vect){
-  SETBIT(PORTC, PORTC7);
-}
-
-ISR(TIMER4_COMPA_vect){
-  UNSETBIT(PORTC, PORTC7);
 }
