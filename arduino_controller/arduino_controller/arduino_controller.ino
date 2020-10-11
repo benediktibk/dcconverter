@@ -1,5 +1,10 @@
-#define SETBIT(TARGET, TARGETBIT) TARGET |= (1<<TARGETBIT)
-#define UNSETBIT(TARGET, TARGETBIT) TARGET &= ~(1<<TARGETBIT)
+enum CountLength {
+  CountLengthFast, // 15ns
+  CountLengthSlow // 256us
+};
+
+const CountLength countLength = CountLengthSlow;
+const bool outputInverted = true;
 
 void setup() {
   pinMode(12, OUTPUT);
@@ -40,16 +45,33 @@ void setup() {
   TC4H = 0x02;
   OCR4C = 0x9F;
   
-  // set the prescaler of timer 4 to /1 at an input frequency (set further above via PLL to 64 MHz) -> 14,901 ns per count
+  // set the prescaler of timer 4 to adjust the frequency, based on the input frequency of 64 MHz of the PLL
   TCCR4B = 0;
-  TCCR4B |= (1<<CS40);
-  TCCR4B |= (0<<CS41);
-  TCCR4B |= (0<<CS42);
-  TCCR4B |= (0<<CS43);
 
-  // set the pin OC4A to high when the value in OCR4A is reached
-  TCCR4A |= (0<<COM4A0);
-  TCCR4A |= (1<<COM4A1);
+  switch (countLength) {
+    case CountLengthSlow:
+      TCCR4B |= (1<<CS40);
+      TCCR4B |= (1<<CS41);
+      TCCR4B |= (1<<CS42);
+      TCCR4B |= (1<<CS43);
+      break;
+    case CountLengthFast:
+      TCCR4B |= (1<<CS40);
+      TCCR4B |= (0<<CS41);
+      TCCR4B |= (0<<CS42);
+      TCCR4B |= (0<<CS43);
+      break;
+  }
+
+  // set the pin OC4A to high when the value in OCR4A is reached (or vice versa)
+  if (outputInverted) {
+    TCCR4A |= (1<<COM4A0);
+    TCCR4A |= (1<<COM4A1);
+  }
+  else {
+    TCCR4A |= (0<<COM4A0);
+    TCCR4A |= (1<<COM4A1);
+  }
 }
 
 void loop() { 
