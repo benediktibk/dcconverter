@@ -14,7 +14,7 @@ enum CountLength {
 };
 
 const CountLength countLength = CountLengthSlow;
-const bool outputInverted = true;
+const bool outputInverted = false;
 const float conversionFactorInputValue = 5.0/1024;
 const float targetValue = 2.4;
 const float kp = 1;
@@ -114,7 +114,7 @@ void loop() {
 
   LOGVALUE("on time count", onTimeConverted, "steps");
   
-  byte valueToSet = onTimeConverted;
+  //onTimeConverted = 67;
   TC4H = (onTimeConverted>>8);
   OCR4A = (onTimeConverted&255);
   delay(100);
