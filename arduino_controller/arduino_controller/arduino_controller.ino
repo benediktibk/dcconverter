@@ -18,7 +18,11 @@ const bool outputInverted = true;
 const float conversionFactorInputValue = 5.0/1024;
 const float targetValue = 2.4;
 const float kp = 1;
+const float Ki = 0.2;
 const int maximumCount = 671;
+const float maximumCumulativeError = 100;
+
+float cumulativeError = 0;
 
 void setup() {
   pinMode(12, OUTPUT);
@@ -95,7 +99,13 @@ void loop() {
   float currentValue = analogRead(0)*conversionFactorInputValue;
   LOGVALUE("current value", currentValue, "V");
   float error = targetValue - currentValue;
-  float onTimeInPercent = kp * error;
+  cumulativeError += error;
+
+  cumulativeError = min(cumulativeError, maximumCumulativeError);
+  cumulativeError = max(cumulativeError, (-1)*maximumCumulativeError);
+  LOGVALUE("cumulative error", cumulativeError, "");
+  
+  float onTimeInPercent = kp * error + Ki * cumulativeError;
 
   int onTimeConverted = onTimeInPercent * maximumCount;
 
