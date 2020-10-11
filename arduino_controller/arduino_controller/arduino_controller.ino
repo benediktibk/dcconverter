@@ -17,7 +17,7 @@ const CountLength countLength = CountLengthSlow;
 const bool outputInverted = true;
 const float conversionFactorInputValue = 5.0/1024;
 const float targetValue = 2.4;
-const float kp = 0.01;
+const float kp = 1;
 const int maximumCount = 671;
 
 void setup() {
@@ -99,17 +99,13 @@ void loop() {
 
   int onTimeConverted = onTimeInPercent * maximumCount;
 
-  if (onTimeConverted < 0) {
-    onTimeConverted = 0;
-  }
-  else if (onTimeConverted >= maximumCount) {
-    onTimeConverted = maximumCount - 1;
-  }
+  onTimeConverted = max(onTimeConverted, 1);
+  onTimeConverted = min(onTimeConverted, maximumCount - 1);
 
   LOGVALUE("on time count", onTimeConverted, "steps");
   
   byte valueToSet = onTimeConverted;
-  //TC4H = (onTimeConverted>>8);
-  //OCR4A = (onTimeConverted&255);
+  TC4H = (onTimeConverted>>8);
+  OCR4A = (onTimeConverted&255);
   delay(100);
 }
