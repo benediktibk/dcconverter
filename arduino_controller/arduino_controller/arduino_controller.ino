@@ -20,7 +20,7 @@ const float targetValue = 2.4;
 const float kp = 1;
 const float Ki = 0.2;
 const int maximumCount = 671;
-const float maximumCumulativeError = 100;
+const float maximumCumulativeError = 50;
 
 float cumulativeError = 0;
 
@@ -37,7 +37,6 @@ void setup() {
   bool locked = false;
   do {
     locked = PLLCSR & (1<<PLOCK);
-    digitalWrite(12, true);
   } while (!locked);
 
   // configure the PLL frequency
@@ -93,6 +92,7 @@ void setup() {
 
   // Configure serial communication
   Serial.begin(9600);
+  digitalWrite(12, true);
 }
 
 void loop() { 
