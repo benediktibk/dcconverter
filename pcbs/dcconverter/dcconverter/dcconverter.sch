@@ -112,14 +112,6 @@ $EndComp
 Wire Wire Line
 	2900 1950 3550 1950
 Connection ~ 2900 1950
-Wire Wire Line
-	4650 2450 3400 2450
-Wire Wire Line
-	3400 2450 3400 2200
-Wire Wire Line
-	3400 2200 3550 2200
-Wire Wire Line
-	4650 1950 4650 2450
 $Comp
 L Device:CP C1
 U 1 1 5F94337F
@@ -131,8 +123,6 @@ F 3 "~" H 5050 2400 50  0001 C CNN
 	1    5050 2400
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4650 1950 5050 1950
 Wire Wire Line
 	5050 1950 5050 2250
 Wire Wire Line
@@ -183,7 +173,6 @@ Wire Wire Line
 	5050 1950 5750 1950
 Wire Wire Line
 	5750 1950 5750 2050
-Connection ~ 5050 1950
 Wire Wire Line
 	5750 2350 5750 2500
 Wire Wire Line
@@ -425,9 +414,20 @@ Wire Wire Line
 Wire Wire Line
 	3700 3700 1450 3700
 Wire Wire Line
-	4500 1950 4550 1950
+	4650 1950 4650 2450
 Wire Wire Line
-	4550 1950 4550 2200
+	4650 2450 3400 2450
 Wire Wire Line
-	4550 2200 4500 2200
+	3400 2450 3400 2200
+Wire Wire Line
+	3400 2200 3550 2200
+Wire Wire Line
+	4500 1950 4650 1950
+Wire Wire Line
+	4750 2200 4750 1950
+Wire Wire Line
+	4750 1950 5050 1950
+Wire Wire Line
+	4500 2200 4750 2200
+Connection ~ 5050 1950
 $EndSCHEMATC
