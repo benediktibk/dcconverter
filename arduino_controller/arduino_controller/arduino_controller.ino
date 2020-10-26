@@ -114,8 +114,8 @@ void loop() {
 
   LOGVALUE("on time count", onTimeConverted, "steps");
   
-  //onTimeConverted = 67;
+  //onTimeConverted = 400;
   TC4H = (onTimeConverted>>8);
   OCR4A = (onTimeConverted&255);
-  delay(100);
+  delay(50);
 }
