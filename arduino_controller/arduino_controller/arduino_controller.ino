@@ -1,11 +1,11 @@
-#define DEBUGLOGGING
+//#define DEBUGLOGGING
 
 #ifdef DEBUGLOGGING
 #define LOGVALUE(description, value, unit) Serial.print(description); Serial.print(": "); Serial.print(value); Serial.print(" "); Serial.println(unit);
 #endif
 
 #ifndef DEBUGLOGGING
-#define LOGVALUE((description, value, unit) ;
+#define LOGVALUE(description, value, unit) ;
 #endif
 
 enum CountLength {
@@ -97,13 +97,13 @@ void setup() {
 
 void loop() { 
   float currentValue = analogRead(0)*conversionFactorInputValue;
-  //LOGVALUE("current value", currentValue, "V");
+  LOGVALUE("current value", currentValue, "V");
   float error = targetValue - currentValue;
   cumulativeError += error;
 
   cumulativeError = min(cumulativeError, maximumCumulativeError);
   cumulativeError = max(cumulativeError, (-1)*maximumCumulativeError);
-  //LOGVALUE("cumulative error", cumulativeError, "");
+  LOGVALUE("cumulative error", cumulativeError, "");
   
   float onTimeInPercent = kp * error + Ki * cumulativeError;
 
@@ -112,7 +112,7 @@ void loop() {
   onTimeConverted = max(onTimeConverted, 1);
   onTimeConverted = min(onTimeConverted, maximumCount - 1);
 
-  //LOGVALUE("on time count", onTimeConverted, "steps");
+  LOGVALUE("on time count", onTimeConverted, "steps");
   
   //onTimeConverted = 400;
   TC4H = (onTimeConverted>>8);
