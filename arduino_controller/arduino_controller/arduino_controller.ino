@@ -17,8 +17,8 @@ const CountLength countLength = CountLengthSlow;
 const bool outputInverted = false;
 const float conversionFactorInputValue = 5.0/1024;
 const float targetValue = 2.4;
-const float kp = 1;
-const float Ki = 0.2;
+const float kp = 0.5;
+const float Ki = 0.01;
 const int maximumCount = 671;
 const float maximumCumulativeError = 50;
 
@@ -97,13 +97,13 @@ void setup() {
 
 void loop() { 
   float currentValue = analogRead(0)*conversionFactorInputValue;
-  LOGVALUE("current value", currentValue, "V");
+  //LOGVALUE("current value", currentValue, "V");
   float error = targetValue - currentValue;
   cumulativeError += error;
 
   cumulativeError = min(cumulativeError, maximumCumulativeError);
   cumulativeError = max(cumulativeError, (-1)*maximumCumulativeError);
-  LOGVALUE("cumulative error", cumulativeError, "");
+  //LOGVALUE("cumulative error", cumulativeError, "");
   
   float onTimeInPercent = kp * error + Ki * cumulativeError;
 
@@ -112,10 +112,9 @@ void loop() {
   onTimeConverted = max(onTimeConverted, 1);
   onTimeConverted = min(onTimeConverted, maximumCount - 1);
 
-  LOGVALUE("on time count", onTimeConverted, "steps");
+  //LOGVALUE("on time count", onTimeConverted, "steps");
   
   //onTimeConverted = 400;
   TC4H = (onTimeConverted>>8);
   OCR4A = (onTimeConverted&255);
-  delay(50);
 }
