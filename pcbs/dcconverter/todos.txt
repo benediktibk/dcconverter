@@ -6,3 +6,5 @@ PCB:
 - real connector for fans
 - controller on same PCB
 - Überspannungsschutz
+- Spannungsmessung Eingang
+- Korrekte Sicherung für 1kV
