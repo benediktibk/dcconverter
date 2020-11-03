@@ -1,11 +1,4 @@
-19008501192375818
-Arduino Micro
-ARDUINO_MICRO_SHIELD
-
-ARDUINO, MICRO
-0
-34
-31
+19010195549361294
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -48775,6 +48768,90 @@ THT ceramic resonator filter DSS6
 0
 3
 3
+Custom
+744839010400
+744839010400
+Filter
+0
+7
+7
+Custom
+ARDUINO_MICRO_SHIELD
+
+ARDUINO, MICRO
+0
+34
+31
+Custom
+CAPPRD1250W100D2550H5200
+UVZ1H103MRD-1
+Capacitor Polarised
+0
+2
+2
+Custom
+CES-102-XX-Y-S
+CES-102-XX-Y-S
+Connector
+0
+2
+2
+Custom
+CES-106-XX-Y-S
+CES-106-XX-Y-S
+Connector
+0
+6
+6
+Custom
+NE555DR
+D (R-PDSO-G8)
+Integrated Circuit
+0
+8
+8
+Custom
+SLB4-I90
+
+
+0
+1
+1
+Custom
+TO254P482X997X2018-3P
+TO-220 CASE221AB
+Integrated Circuit
+0
+3
+3
+Custom
+TO254P483X1016X2261-3P
+FQP47P06_1
+MOSFET (P-Channel)
+0
+3
+3
+Custom
+TO545P570X1550X2990-3P
+TO-3PF-3L
+Transistor
+0
+3
+3
+Custom
+connector_2pin_P10.6mm
+
+
+0
+4
+2
+Custom
+rb8522_size5
+
+
+0
+4
+4
 Diode_SMD
 D_0201_0603Metric
 Diode SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator
@@ -76299,62 +76376,6 @@ rotary encoder
 0
 5
 4
-SamacSys_Parts
-744839010400
-744839010400
-Filter
-0
-7
-7
-SamacSys_Parts
-CAPPRD1250W100D2550H5200
-UVZ1H103MRD-1
-Capacitor Polarised
-0
-2
-2
-SamacSys_Parts
-CES-102-XX-Y-S
-CES-102-XX-Y-S
-Connector
-0
-2
-2
-SamacSys_Parts
-CES-106-XX-Y-S
-CES-106-XX-Y-S
-Connector
-0
-6
-6
-SamacSys_Parts
-NE555DR
-D (R-PDSO-G8)
-Integrated Circuit
-0
-8
-8
-SamacSys_Parts
-TO254P482X997X2018-3P
-TO-220 CASE221AB
-Integrated Circuit
-0
-3
-3
-SamacSys_Parts
-TO254P483X1016X2261-3P
-FQP47P06_1
-MOSFET (P-Channel)
-0
-3
-3
-SamacSys_Parts
-TO545P570X1550X2990-3P
-TO-3PF-3L
-Transistor
-0
-3
-3
 Sensor
 Aosong_DHT11_5.5x12.0_P2.54mm
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/DHT11.pdf
@@ -83089,17 +83110,3 @@ varistor SIOV
 0
 2
 2
-dcconverter
-connector_2pin_P10.6mm
-
-
-0
-4
-2
-dcconverter
-rb8522_size5
-
-
-0
-4
-4

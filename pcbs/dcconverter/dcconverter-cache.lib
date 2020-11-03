@@ -70,6 +70,75 @@ X Pin_2 2 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
+# Custom_2phase_inductor
+#
+DEF Custom_2phase_inductor L 0 0 N Y 1 F N
+F0 "L" 0 100 50 H V C CNN
+F1 "Custom_2phase_inductor" 0 -50 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+S -450 250 500 -250 0 1 0 N
+X L1_1 1 -450 150 100 R 50 50 1 1 I
+X L2_1 2 -450 -100 100 R 50 50 1 1 I
+X L1_2 3 500 150 100 L 50 50 1 1 I
+X L2_2 4 500 -100 100 L 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# Custom_FQP47P06
+#
+DEF Custom_FQP47P06 Q 0 30 Y Y 1 F N
+F0 "Q" 450 150 50 H V L CNN
+F1 "Custom_FQP47P06" 450 50 50 H V L CNN
+F2 "TO254P483X1016X2261-3P" 450 -50 50 H I L CNN
+F3 "http://uk.rs-online.com/web/p/products/6715127P" 450 -150 50 H I L CNN
+F4 "Trans MOSFET P-CH 60V 47A 3-Pin TO-220" 450 -250 50 H I L CNN "Description"
+F5 "4.83" 450 -350 50 H I L CNN "Height"
+F6 "6715127P" 450 -450 50 H I L CNN "RS Part Number"
+F7 "http://uk.rs-online.com/web/p/products/6715127P" 450 -550 50 H I L CNN "RS Price/Stock"
+F8 "ON Semiconductor" 450 -650 50 H I L CNN "Manufacturer_Name"
+F9 "FQP47P06" 450 -750 50 H I L CNN "Manufacturer_Part_Number"
+DRAW
+C 250 100 150 0 1 10 N
+P 2 0 1 6 230 -20 230 20 N
+P 2 0 1 6 230 0 300 0 N
+P 2 0 1 6 230 80 230 120 N
+P 2 0 1 6 230 220 230 180 N
+P 2 0 1 6 300 100 230 100 N
+P 2 0 1 6 300 100 300 -100 N
+P 2 0 1 6 300 200 230 200 N
+P 2 0 1 6 300 200 300 300 N
+P 3 0 1 6 100 0 200 0 200 200 N
+P 4 0 1 10 300 100 260 120 260 80 300 100 F
+X ~ 1 0 0 100 R 50 50 0 0 P
+X ~ 2 300 400 100 D 50 50 0 0 P
+X ~ 3 300 -200 100 U 50 50 0 0 P
+ENDDRAW
+ENDDEF
+#
+# Custom_NCP7805TG
+#
+DEF Custom_NCP7805TG IC 0 30 Y Y 1 F N
+F0 "IC" 850 300 50 H V L CNN
+F1 "Custom_NCP7805TG" 850 200 50 H V L CNN
+F2 "TO254P482X997X2018-3P" 850 100 50 H I L CNN
+F3 "http://uk.rs-online.com/web/p/products/7192768P" 850 0 50 H I L CNN
+F4 "Voltage Regulator 1A Positive 5V TO-220 NCP7805TG, Low Dropout Voltage Regulator, 1A 5 V, 4%, 3-Pin TO-220" 850 -100 50 H I L CNN "Description"
+F5 "4.82" 850 -200 50 H I L CNN "Height"
+F6 "7192768P" 850 -300 50 H I L CNN "RS Part Number"
+F7 "http://uk.rs-online.com/web/p/products/7192768P" 850 -400 50 H I L CNN "RS Price/Stock"
+F8 "ON Semiconductor" 850 -500 50 H I L CNN "Manufacturer_Name"
+F9 "NCP7805TG" 850 -600 50 H I L CNN "Manufacturer_Part_Number"
+F10 "70341025" 850 -700 50 H I L CNN "Allied_Number"
+DRAW
+P 5 0 1 6 200 100 800 100 800 -300 200 -300 200 100 N
+X INPUT 1 0 0 200 R 50 50 0 0 I
+X GROUND 2 0 -100 200 R 50 50 0 0 W
+X OUTPUT 3 0 -200 200 R 50 50 0 0 O
+ENDDRAW
+ENDDEF
+#
 # Device_C
 #
 DEF Device_C C 0 10 N Y 1 F N
@@ -229,59 +298,6 @@ X ~ 2 100 -100 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# SamacSys_Parts_FQP47P06
-#
-DEF SamacSys_Parts_FQP47P06 Q 0 30 Y Y 1 F N
-F0 "Q" 450 150 50 H V L CNN
-F1 "SamacSys_Parts_FQP47P06" 450 50 50 H V L CNN
-F2 "TO254P483X1016X2261-3P" 450 -50 50 H I L CNN
-F3 "http://uk.rs-online.com/web/p/products/6715127P" 450 -150 50 H I L CNN
-F4 "Trans MOSFET P-CH 60V 47A 3-Pin TO-220" 450 -250 50 H I L CNN "Description"
-F5 "4.83" 450 -350 50 H I L CNN "Height"
-F6 "6715127P" 450 -450 50 H I L CNN "RS Part Number"
-F7 "http://uk.rs-online.com/web/p/products/6715127P" 450 -550 50 H I L CNN "RS Price/Stock"
-F8 "ON Semiconductor" 450 -650 50 H I L CNN "Manufacturer_Name"
-F9 "FQP47P06" 450 -750 50 H I L CNN "Manufacturer_Part_Number"
-DRAW
-C 250 100 150 0 1 10 N
-P 2 0 1 6 230 -20 230 20 N
-P 2 0 1 6 230 0 300 0 N
-P 2 0 1 6 230 80 230 120 N
-P 2 0 1 6 230 220 230 180 N
-P 2 0 1 6 300 100 230 100 N
-P 2 0 1 6 300 100 300 -100 N
-P 2 0 1 6 300 200 230 200 N
-P 2 0 1 6 300 200 300 300 N
-P 3 0 1 6 100 0 200 0 200 200 N
-P 4 0 1 10 300 100 260 120 260 80 300 100 F
-X ~ 1 0 0 100 R 50 50 0 0 P
-X ~ 2 300 400 100 D 50 50 0 0 P
-X ~ 3 300 -200 100 U 50 50 0 0 P
-ENDDRAW
-ENDDEF
-#
-# SamacSys_Parts_NCP7805TG
-#
-DEF SamacSys_Parts_NCP7805TG IC 0 30 Y Y 1 F N
-F0 "IC" 850 300 50 H V L CNN
-F1 "SamacSys_Parts_NCP7805TG" 850 200 50 H V L CNN
-F2 "TO254P482X997X2018-3P" 850 100 50 H I L CNN
-F3 "http://uk.rs-online.com/web/p/products/7192768P" 850 0 50 H I L CNN
-F4 "Voltage Regulator 1A Positive 5V TO-220 NCP7805TG, Low Dropout Voltage Regulator, 1A 5 V, 4%, 3-Pin TO-220" 850 -100 50 H I L CNN "Description"
-F5 "4.82" 850 -200 50 H I L CNN "Height"
-F6 "7192768P" 850 -300 50 H I L CNN "RS Part Number"
-F7 "http://uk.rs-online.com/web/p/products/7192768P" 850 -400 50 H I L CNN "RS Price/Stock"
-F8 "ON Semiconductor" 850 -500 50 H I L CNN "Manufacturer_Name"
-F9 "NCP7805TG" 850 -600 50 H I L CNN "Manufacturer_Part_Number"
-F10 "70341025" 850 -700 50 H I L CNN "Allied_Number"
-DRAW
-P 5 0 1 6 200 100 800 100 800 -300 200 -300 200 100 N
-X INPUT 1 0 0 200 R 50 50 0 0 I
-X GROUND 2 0 -100 200 R 50 50 0 0 W
-X OUTPUT 3 0 -200 200 R 50 50 0 0 O
-ENDDRAW
-ENDDEF
-#
 # Transistor_BJT_2N2219
 #
 DEF Transistor_BJT_2N2219 Q 0 0 Y N 1 F N
@@ -365,22 +381,6 @@ P 4 0 1 0 130 -15 115 10 145 10 130 -15 N
 X G 1 -200 0 100 R 50 50 1 1 I
 X S 2 100 -200 100 U 50 50 1 1 P
 X D 3 100 200 100 D 50 50 1 1 P
-ENDDRAW
-ENDDEF
-#
-# dcconverter_2phase_inductor
-#
-DEF dcconverter_2phase_inductor L 0 0 N Y 1 F N
-F0 "L" 0 100 50 H V C CNN
-F1 "dcconverter_2phase_inductor" 0 -50 50 H V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-DRAW
-S -450 250 500 -250 0 1 0 N
-X L1_1 1 -450 150 100 R 50 50 1 1 I
-X L2_1 2 -450 -100 100 R 50 50 1 1 I
-X L1_2 3 500 150 100 L 50 50 1 1 I
-X L2_2 4 500 -100 100 L 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
