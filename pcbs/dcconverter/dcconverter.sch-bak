@@ -99,7 +99,7 @@ F 3 "~" H 2712 2650 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L dcconverter-rescue:2phase_inductor-dcconverter L1
+L Custom:2phase_inductor L1
 U 1 1 5F94118A
 P 4000 2100
 F 0 "L1" H 4025 2515 50  0000 C CNN
@@ -303,7 +303,7 @@ Wire Wire Line
 	2350 5750 1800 5750
 Connection ~ 1800 5750
 $Comp
-L dcconverter-rescue:FQP47P06-SamacSys_Parts Q2
+L Custom:FQP47P06 Q2
 U 1 1 5F96B06C
 P 6700 2250
 F 0 "Q2" V 7267 2350 50  0000 C CNN
@@ -333,7 +333,7 @@ F 3 "~" H 1800 5250 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L dcconverter-rescue:NCP7805TG-SamacSys_Parts IC1
+L Custom:NCP7805TG IC1
 U 1 1 5F9736CA
 P 3800 5150
 F 0 "IC1" H 4628 5096 50  0000 L CNN
