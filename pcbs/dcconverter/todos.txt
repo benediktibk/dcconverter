@@ -8,3 +8,4 @@ PCB:
 - Überspannungsschutz
 - Spannungsmessung Eingang
 - Korrekte Sicherung für 1kV
+- Verpolungsschutz
