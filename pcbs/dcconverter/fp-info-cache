@@ -1,4 +1,4 @@
-19276074245505571
+19277679785662657
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -49272,6 +49272,13 @@ Connector
 0
 6
 6
+Custom
+Heatsink
+
+
+0
+0
+0
 Custom
 NE555DR
 D (R-PDSO-G8)

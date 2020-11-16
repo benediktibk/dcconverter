@@ -40,8 +40,8 @@ L Mechanical:Heatsink_Pad_2Pin HS-Q1
 U 1 1 5F93ACCE
 P 2450 1500
 F 0 "HS-Q1" H 2638 1539 50  0000 L CNN
-F 1 "893-4942" H 2638 1448 50  0000 L CNN
-F 2 "Heatsink:Heatsink_Fischer_SK129-STS_42x25mm_2xDrill2.5mm" H 2462 1450 50  0001 C CNN
+F 1 "HeatsinkUpright" H 2638 1448 50  0000 L CNN
+F 2 "Custom:HeatsinkUpright" H 2462 1450 50  0001 C CNN
 F 3 "~" H 2462 1450 50  0001 C CNN
 	1    2450 1500
 	1    0    0    -1  
@@ -113,7 +113,7 @@ Wire Wire Line
 	2900 1950 3550 1950
 Connection ~ 2900 1950
 $Comp
-L Device:CP C1
+L Custom:CP-Device C1
 U 1 1 5F94337F
 P 5050 2400
 F 0 "C1" H 5168 2446 50  0000 L CNN

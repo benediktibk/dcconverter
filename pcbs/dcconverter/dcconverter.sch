@@ -40,8 +40,8 @@ L Mechanical:Heatsink_Pad_2Pin HS-Q1
 U 1 1 5F93ACCE
 P 2450 1500
 F 0 "HS-Q1" H 2638 1539 50  0000 L CNN
-F 1 "893-4942" H 2638 1448 50  0000 L CNN
-F 2 "Heatsink:Heatsink_Fischer_SK129-STS_42x25mm_2xDrill2.5mm" H 2462 1450 50  0001 C CNN
+F 1 "HeatsinkUpright" H 2638 1448 50  0000 L CNN
+F 2 "Custom:HeatsinkUpright" H 2462 1450 50  0001 C CNN
 F 3 "~" H 2462 1450 50  0001 C CNN
 	1    2450 1500
 	1    0    0    -1  
@@ -92,8 +92,8 @@ L Mechanical:Heatsink_Pad_2Pin HS-D1
 U 1 1 5F93F452
 P 2700 2700
 F 0 "HS-D1" V 2419 2693 50  0000 C CNN
-F 1 "893-4942" V 2510 2693 50  0000 C CNN
-F 2 "Heatsink:Heatsink_Fischer_SK129-STS_42x25mm_2xDrill2.5mm" H 2712 2650 50  0001 C CNN
+F 1 "HeatsinkUpright" V 2510 2693 50  0000 C CNN
+F 2 "Custom:HeatsinkUpright" H 2712 2650 50  0001 C CNN
 F 3 "~" H 2712 2650 50  0001 C CNN
 	1    2700 2700
 	0    -1   1    0   
@@ -198,8 +198,8 @@ L Mechanical:Heatsink_Pad_2Pin HS-Q2
 U 1 1 5F94C442
 P 6800 1500
 F 0 "HS-Q2" H 6988 1539 50  0000 L CNN
-F 1 "893-4942" H 6988 1448 50  0000 L CNN
-F 2 "Heatsink:Heatsink_Fischer_SK129-STS_42x25mm_2xDrill2.5mm" H 6812 1450 50  0001 C CNN
+F 1 "HeatsinkUpright" H 6988 1448 50  0000 L CNN
+F 2 "Custom:HeatsinkUpright" H 6812 1450 50  0001 C CNN
 F 3 "~" H 6812 1450 50  0001 C CNN
 	1    6800 1500
 	1    0    0    -1  
@@ -412,8 +412,8 @@ L Mechanical:Heatsink_Pad_2Pin HS-IC1
 U 1 1 5F955A4D
 P 4300 4900
 F 0 "HS-IC1" H 4488 4939 50  0000 L CNN
-F 1 "893-4942" H 4488 4848 50  0000 L CNN
-F 2 "Heatsink:Heatsink_Fischer_SK129-STS_42x25mm_2xDrill2.5mm" H 4312 4850 50  0001 C CNN
+F 1 "HeatsinkUpright" H 4488 4848 50  0000 L CNN
+F 2 "Custom:HeatsinkUpright" H 4312 4850 50  0001 C CNN
 F 3 "~" H 4312 4850 50  0001 C CNN
 	1    4300 4900
 	1    0    0    -1  
