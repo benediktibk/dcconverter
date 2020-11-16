@@ -19,7 +19,7 @@ U 1 1 5F938BEF
 P 1250 1950
 F 0 "J1" H 1168 2167 50  0000 C CNN
 F 1 "190-9991" H 1168 2076 50  0000 C CNN
-F 2 "TerminalBlock_Dinkle:TerminalBlock_Dinkle_DT-55-B01X-02_P10.00mm" H 1250 1950 50  0001 C CNN
+F 2 "Custom:TerminalBlock_2pin_10mm" H 1250 1950 50  0001 C CNN
 F 3 "~" H 1250 1950 50  0001 C CNN
 	1    1250 1950
 	-1   0    0    -1  
