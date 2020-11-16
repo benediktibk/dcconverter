@@ -113,7 +113,7 @@ Wire Wire Line
 	2900 1950 3550 1950
 Connection ~ 2900 1950
 $Comp
-L Device:CP C1
+L Custom:CP-Device C1
 U 1 1 5F94337F
 P 5050 2400
 F 0 "C1" H 5168 2446 50  0000 L CNN
