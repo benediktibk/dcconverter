@@ -87,7 +87,7 @@ Connection ~ 1800 2550
 Wire Wire Line
 	1800 2550 1800 2650
 $Comp
-L Device:CP C1
+L Custom:CP-Device C1
 U 1 1 5F880EC9
 P 3450 2700
 F 0 "C1" H 3568 2746 50  0000 L CNN
@@ -98,7 +98,7 @@ F 3 "~" H 3450 2700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:CP C2
+L Custom:CP-Device C2
 U 1 1 5F88202C
 P 4250 2700
 F 0 "C2" H 4368 2746 50  0000 L CNN
