@@ -16,12 +16,12 @@ $EndDescr
 $Comp
 L Connector:Screw_Terminal_01x02 J1
 U 1 1 5F938BEF
-P 850 1200
-F 0 "J1" H 768 1417 50  0000 C CNN
-F 1 "190-9991" H 768 1326 50  0000 C CNN
-F 2 "Custom:TerminalBlock_2pin_10mm" H 850 1200 50  0001 C CNN
-F 3 "~" H 850 1200 50  0001 C CNN
-	1    850  1200
+P 700 1200
+F 0 "J1" H 618 1417 50  0000 C CNN
+F 1 "190-9991" H 618 1326 50  0000 C CNN
+F 2 "Custom:TerminalBlock_2pin_10mm" H 700 1200 50  0001 C CNN
+F 3 "~" H 700 1200 50  0001 C CNN
+	1    700  1200
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -162,10 +162,10 @@ F 3 "~" H 8612 700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J3
+L Connector_Generic:Conn_01x02 J4
 U 1 1 5F94D2E0
 P 10400 1200
-F 0 "J3" H 10480 1192 50  0000 L CNN
+F 0 "J4" H 10480 1192 50  0000 L CNN
 F 1 "146-8335" H 10480 1101 50  0000 L CNN
 F 2 "Custom:connector_2pin_P10.6mm" H 10400 1200 50  0001 C CNN
 F 3 "~" H 10400 1200 50  0001 C CNN
@@ -184,7 +184,7 @@ F 3 "~" H 9550 1200 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	10200 1200 9700 1200
+	10200 1200 10050 1200
 Wire Wire Line
 	9400 1200 8900 1200
 Wire Wire Line
@@ -526,10 +526,10 @@ $EndComp
 Wire Wire Line
 	3700 2850 3700 4600
 $Comp
-L Connector_Generic:Conn_01x02 J4
+L Connector_Generic:Conn_01x02 J7
 U 1 1 5FA3A804
 P 1150 3600
-F 0 "J4" H 1150 3850 50  0000 C CNN
+F 0 "J7" H 1150 3850 50  0000 C CNN
 F 1 "766-6604" H 1150 3750 50  0000 C CNN
 F 2 "Custom:CES-102-XX-Y-S" H 1150 3600 50  0001 C CNN
 F 3 "~" H 1150 3600 50  0001 C CNN
@@ -537,10 +537,10 @@ F 3 "~" H 1150 3600 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x02 J5
+L Connector_Generic:Conn_01x02 J8
 U 1 1 5FA5AA03
 P 1150 4100
-F 0 "J5" H 1150 4350 50  0000 C CNN
+F 0 "J8" H 1150 4350 50  0000 C CNN
 F 1 "766-6604" H 1150 4250 50  0000 C CNN
 F 2 "Custom:CES-102-XX-Y-S" H 1150 4100 50  0001 C CNN
 F 3 "~" H 1150 4100 50  0001 C CNN
@@ -776,10 +776,10 @@ Connection ~ 2000 1200
 Wire Wire Line
 	1650 2350 1850 2350
 $Comp
-L Device:R R1
+L Device:R R13
 U 1 1 5FBBC80C
 P 1850 1450
-F 0 "R1" H 1920 1496 50  0000 L CNN
+F 0 "R13" H 1920 1496 50  0000 L CNN
 F 1 "10MOhm" H 1920 1405 50  0000 L CNN
 F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal" V 1780 1450 50  0001 C CNN
 F 3 "~" H 1850 1450 50  0001 C CNN
@@ -803,11 +803,7 @@ Connection ~ 1650 2350
 Wire Wire Line
 	1200 2350 1200 1300
 Wire Wire Line
-	1200 1300 1050 1300
-Wire Wire Line
 	1200 2350 1650 2350
-Wire Wire Line
-	1050 1200 1100 1200
 Wire Wire Line
 	1400 1200 1500 1200
 Wire Wire Line
@@ -823,10 +819,10 @@ Connection ~ 1850 2350
 Wire Wire Line
 	1850 2350 2900 2350
 $Comp
-L Custom:Arduino_Micro_Socket XA?
+L Custom:Arduino_Micro_Socket XA1
 U 1 1 5FBF5E9B
 P 3950 6450
-F 0 "XA?" H 3950 7687 60  0000 C CNN
+F 0 "XA1" H 3950 7687 60  0000 C CNN
 F 1 "Arduino_Micro_Socket" H 3950 7581 60  0000 C CNN
 F 2 "Custom:Arduino_Micro_Socket" H 5750 10200 60  0001 C CNN
 F 3 "https://store.arduino.cc/arduino-micro" H 5750 10200 60  0001 C CNN
@@ -876,4 +872,74 @@ Wire Wire Line
 	6900 6250 6900 1900
 Wire Wire Line
 	6900 1900 7350 1900
+$Comp
+L Connector_Generic:Conn_01x01 J3
+U 1 1 5FC4664A
+P 700 650
+F 0 "J3" H 618 867 50  0000 C CNN
+F 1 "Conn_01x01" H 618 776 50  0000 C CNN
+F 2 "Custom:SLB4-I90" H 700 650 50  0001 C CNN
+F 3 "~" H 700 650 50  0001 C CNN
+	1    700  650 
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x01 J2
+U 1 1 5FC46DC5
+P 700 850
+F 0 "J2" H 618 1067 50  0000 C CNN
+F 1 "Conn_01x01" H 618 976 50  0000 C CNN
+F 2 "Custom:SLB4-I90" H 700 850 50  0001 C CNN
+F 3 "~" H 700 850 50  0001 C CNN
+	1    700  850 
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	900  850  900  1200
+Connection ~ 900  1200
+Wire Wire Line
+	900  1200 1100 1200
+Wire Wire Line
+	900  1300 1000 1300
+Wire Wire Line
+	900  650  1000 650 
+Wire Wire Line
+	1000 650  1000 1300
+Connection ~ 1000 1300
+Wire Wire Line
+	1000 1300 1200 1300
+$Comp
+L Connector_Generic:Conn_01x01 J5
+U 1 1 5FC84274
+P 10400 900
+F 0 "J5" H 10480 942 50  0000 L CNN
+F 1 "Conn_01x01" H 10480 851 50  0000 L CNN
+F 2 "Custom:SLB4-I90" H 10400 900 50  0001 C CNN
+F 3 "~" H 10400 900 50  0001 C CNN
+	1    10400 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x01 J6
+U 1 1 5FC8CBC2
+P 10400 700
+F 0 "J6" H 10480 742 50  0000 L CNN
+F 1 "Conn_01x01" H 10480 651 50  0000 L CNN
+F 2 "Custom:SLB4-I90" H 10400 700 50  0001 C CNN
+F 3 "~" H 10400 700 50  0001 C CNN
+	1    10400 700 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10200 700  9950 700 
+Wire Wire Line
+	9950 700  9950 1300
+Connection ~ 9950 1300
+Wire Wire Line
+	10200 900  10050 900 
+Wire Wire Line
+	10050 900  10050 1200
+Connection ~ 10050 1200
+Wire Wire Line
+	10050 1200 9700 1200
 $EndSCHEMATC
