@@ -98,9 +98,6 @@ F 3 "~" H 4000 2100 50  0001 C CNN
 	1    4000 2100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2900 1950 3550 1950
-Connection ~ 2900 1950
 $Comp
 L Custom:CP-Device C1
 U 1 1 5F94337F
@@ -287,22 +284,6 @@ Wire Wire Line
 	3150 5250 3150 5750
 Wire Wire Line
 	3800 5350 3700 5350
-Wire Wire Line
-	4650 1950 4650 2450
-Wire Wire Line
-	4650 2450 3400 2450
-Wire Wire Line
-	3400 2450 3400 2200
-Wire Wire Line
-	3400 2200 3550 2200
-Wire Wire Line
-	4500 1950 4650 1950
-Wire Wire Line
-	4750 2200 4750 1950
-Wire Wire Line
-	4750 1950 5050 1950
-Wire Wire Line
-	4500 2200 4750 2200
 Connection ~ 5050 1950
 $Comp
 L Transistor_FET:2N7000 Q3
@@ -777,4 +758,23 @@ Wire Wire Line
 Wire Wire Line
 	6600 5000 6400 5000
 Connection ~ 6400 5000
+Wire Wire Line
+	2900 1950 3350 1950
+Connection ~ 2900 1950
+Wire Wire Line
+	3550 2200 3350 2200
+Wire Wire Line
+	3350 2200 3350 1950
+Connection ~ 3350 1950
+Wire Wire Line
+	3350 1950 3550 1950
+Wire Wire Line
+	4500 1950 4650 1950
+Wire Wire Line
+	4500 2200 4650 2200
+Wire Wire Line
+	4650 2200 4650 1950
+Connection ~ 4650 1950
+Wire Wire Line
+	4650 1950 5050 1950
 $EndSCHEMATC
