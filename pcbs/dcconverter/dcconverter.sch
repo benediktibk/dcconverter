@@ -16,12 +16,12 @@ $EndDescr
 $Comp
 L Connector:Screw_Terminal_01x02 J1
 U 1 1 5F938BEF
-P 1250 1950
-F 0 "J1" H 1168 2167 50  0000 C CNN
-F 1 "190-9991" H 1168 2076 50  0000 C CNN
-F 2 "Custom:TerminalBlock_2pin_10mm" H 1250 1950 50  0001 C CNN
-F 3 "~" H 1250 1950 50  0001 C CNN
-	1    1250 1950
+P 850 1950
+F 0 "J1" H 768 2167 50  0000 C CNN
+F 1 "190-9991" H 768 2076 50  0000 C CNN
+F 2 "Custom:TerminalBlock_2pin_10mm" H 850 1950 50  0001 C CNN
+F 3 "~" H 850 1950 50  0001 C CNN
+	1    850  1950
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -49,18 +49,16 @@ $EndComp
 $Comp
 L Device:Fuse F1
 U 1 1 5F93C935
-P 1750 1950
-F 0 "F1" V 1553 1950 50  0000 C CNN
-F 1 "2A" V 1644 1950 50  0000 C CNN
-F 2 "Fuse:Fuseholder_Cylinder-5x20mm_Schurter_0031_8201_Horizontal_Open" V 1680 1950 50  0001 C CNN
-F 3 "~" H 1750 1950 50  0001 C CNN
-	1    1750 1950
+P 1350 1950
+F 0 "F1" V 1153 1950 50  0000 C CNN
+F 1 "2A" V 1244 1950 50  0000 C CNN
+F 2 "Fuse:Fuseholder_Cylinder-5x20mm_Schurter_0031_8201_Horizontal_Open" V 1280 1950 50  0001 C CNN
+F 3 "~" H 1350 1950 50  0001 C CNN
+	1    1350 1950
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	1450 1950 1600 1950
-Wire Wire Line
-	1900 1950 2000 1950
+	1050 1950 1200 1950
 $Comp
 L Device:D_Schottky D1
 U 1 1 5F93DD00
@@ -118,9 +116,7 @@ Wire Wire Line
 Wire Wire Line
 	2900 3100 2900 2850
 Wire Wire Line
-	1450 2050 2200 2050
-Wire Wire Line
-	2200 2050 2200 3100
+	1050 2050 1650 2050
 Connection ~ 2900 3100
 $Comp
 L Device:R R1
@@ -200,9 +196,6 @@ Wire Wire Line
 Wire Wire Line
 	9950 2050 9950 3100
 Wire Wire Line
-	2200 3100 2900 3100
-Connection ~ 2200 3100
-Wire Wire Line
 	5550 2500 5750 2500
 $Comp
 L Device:R R3
@@ -221,7 +214,6 @@ Wire Wire Line
 	2000 4000 1800 4000
 Wire Wire Line
 	1800 4000 1800 4100
-Connection ~ 2000 1950
 Wire Wire Line
 	2000 1950 2250 1950
 Connection ~ 2000 4000
@@ -229,8 +221,6 @@ Wire Wire Line
 	1800 5400 1800 5750
 Wire Wire Line
 	1800 5750 1650 5750
-Wire Wire Line
-	1650 3100 2200 3100
 Connection ~ 1800 5750
 $Comp
 L Custom:FQP47P06 Q2
@@ -777,4 +767,25 @@ Wire Wire Line
 Connection ~ 4650 1950
 Wire Wire Line
 	4650 1950 5050 1950
+$Comp
+L Device:D D5
+U 1 1 5FBA5BAB
+P 1750 1950
+F 0 "D5" H 1750 2167 50  0000 C CNN
+F 1 "1N5408G" H 1750 2076 50  0000 C CNN
+F 2 "Diode_THT:D_5W_P12.70mm_Horizontal" H 1750 1950 50  0001 C CNN
+F 3 "~" H 1750 1950 50  0001 C CNN
+	1    1750 1950
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	1500 1950 1600 1950
+Wire Wire Line
+	1900 1950 2000 1950
+Connection ~ 2000 1950
+Wire Wire Line
+	1650 3100 1650 2050
+Connection ~ 1650 3100
+Wire Wire Line
+	1650 3100 2900 3100
 $EndSCHEMATC
