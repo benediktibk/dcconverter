@@ -36,7 +36,7 @@ F 3 "~" H 2450 1300 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Mechanical:Heatsink_Pad_2Pin HS-Q1
+L Mechanical:Heatsink HS-Q1
 U 1 1 5F93ACCE
 P 2450 750
 F 0 "HS-Q1" H 2638 789 50  0000 L CNN
@@ -73,7 +73,7 @@ Wire Wire Line
 Wire Wire Line
 	2900 1200 2650 1200
 $Comp
-L Mechanical:Heatsink_Pad_2Pin HS-D1
+L Mechanical:Heatsink HS-D1
 U 1 1 5F93F452
 P 2700 1950
 F 0 "HS-D1" V 2419 1943 50  0000 C CNN
@@ -151,7 +151,7 @@ Connection ~ 5750 1750
 Wire Wire Line
 	5750 1750 5750 1900
 $Comp
-L Mechanical:Heatsink_Pad_2Pin HS-Q2
+L Mechanical:Heatsink HS-Q2
 U 1 1 5F94C442
 P 8600 750
 F 0 "HS-Q2" H 8788 789 50  0000 L CNN
@@ -287,7 +287,7 @@ Wire Wire Line
 Wire Wire Line
 	3350 4400 3350 4200
 $Comp
-L Mechanical:Heatsink_Pad_2Pin HS-IC1
+L Mechanical:Heatsink HS-IC1
 U 1 1 5F955A4D
 P 4300 4150
 F 0 "HS-IC1" H 4488 4189 50  0000 L CNN
@@ -530,8 +530,8 @@ L Connector_Generic:Conn_01x02 J7
 U 1 1 5FA3A804
 P 1150 3600
 F 0 "J7" H 1150 3850 50  0000 C CNN
-F 1 "766-6604" H 1150 3750 50  0000 C CNN
-F 2 "Custom:CES-102-XX-Y-S" H 1150 3600 50  0001 C CNN
+F 1 "483-8461" H 1150 3750 50  0000 C CNN
+F 2 "Custom:Molex_KK_254_2pin" H 1150 3600 50  0001 C CNN
 F 3 "~" H 1150 3600 50  0001 C CNN
 	1    1150 3600
 	-1   0    0    -1  
@@ -541,8 +541,8 @@ L Connector_Generic:Conn_01x02 J8
 U 1 1 5FA5AA03
 P 1150 4100
 F 0 "J8" H 1150 4350 50  0000 C CNN
-F 1 "766-6604" H 1150 4250 50  0000 C CNN
-F 2 "Custom:CES-102-XX-Y-S" H 1150 4100 50  0001 C CNN
+F 1 "483-8461" H 1150 4250 50  0000 C CNN
+F 2 "Custom:Molex_KK_254_2pin" H 1150 4100 50  0001 C CNN
 F 3 "~" H 1150 4100 50  0001 C CNN
 	1    1150 4100
 	-1   0    0    -1  
@@ -626,7 +626,7 @@ U 1 1 5FB6BBE2
 P 2700 4550
 F 0 "C3" H 2815 4596 50  0000 L CNN
 F 1 "1uF" H 2815 4505 50  0000 L CNN
-F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" H 2738 4400 50  0001 C CNN
+F 2 "Capacitor_THT:CP_Radial_D8.0mm_P2.50mm" H 2738 4400 50  0001 C CNN
 F 3 "~" H 2700 4550 50  0001 C CNN
 	1    2700 4550
 	1    0    0    -1  
@@ -729,7 +729,7 @@ U 1 1 5FBAF070
 P 6400 4600
 F 0 "C5" H 6515 4646 50  0000 L CNN
 F 1 "1uF" H 6515 4555 50  0000 L CNN
-F 2 "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm" H 6438 4450 50  0001 C CNN
+F 2 "Capacitor_THT:CP_Radial_D8.0mm_P2.50mm" H 6438 4450 50  0001 C CNN
 F 3 "~" H 6400 4600 50  0001 C CNN
 	1    6400 4600
 	1    0    0    -1  
